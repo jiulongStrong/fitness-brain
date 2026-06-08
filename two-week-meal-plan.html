@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>两周增肌减肥菜单 — Strong</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #1a1a2e; color: #e0e0e0; font-family: "PingFang SC","Microsoft YaHei",sans-serif; padding: 20px; }
+  .container { max-width: 920px; margin: 0 auto; background: #16213e; border-radius: 16px; padding: 32px; box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
+  h1 { font-size: 24px; color: #ff6b6b; text-align: center; margin-bottom: 4px; }
+  .sub { text-align: center; color: #8892b0; font-size: 13px; margin-bottom: 24px; }
+  .badge-red { display: inline-block; background: #ff6b6b22; color: #ff6b6b; padding: 2px 10px; border-radius: 8px; font-size: 11px; font-weight: bold; }
+  .badge-green { display: inline-block; background: #55efc422; color: #55efc4; padding: 2px 10px; border-radius: 8px; font-size: 11px; font-weight: bold; }
+  .week-title { font-size: 18px; color: #feca57; margin: 28px 0 14px; padding-bottom: 8px; border-bottom: 2px solid #2d3436; display: flex; align-items: center; gap: 10px; }
+  .week-title .week-num { background: #feca57; color: #1a1a2e; padding: 0 10px; border-radius: 6px; font-size: 13px; }
+  .day-card { background: #1a1a3e; border-radius: 12px; padding: 16px; margin-bottom: 12px; border-left: 4px solid #2d3436; }
+  .day-card.train { border-left-color: #ff6b6b; }
+  .day-card.rest { border-left-color: #55efc4; }
+  .day-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+  .day-name { font-size: 15px; font-weight: bold; color: #e0e0e0; }
+  .day-type { font-size: 12px; }
+  .meals { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  @media (max-width: 640px) { .meals { grid-template-columns: 1fr; } .container { padding: 16px; } }
+  .meal { background: #0f3460; border-radius: 8px; padding: 10px 12px; }
+  .meal-label { font-size: 11px; color: #8892b0; margin-bottom: 4px; }
+  .meal-content { font-size: 13px; line-height: 1.7; }
+  .meal-content .highlight { color: #ff6b6b; }
+  .meal-content .green { color: #55efc4; }
+  .meal-content .yellow { color: #feca57; }
+  .meal-full { grid-column: 1 / -1; }
+  .totals { display: flex; gap: 16px; margin-top: 8px; font-size: 12px; color: #8892b0; flex-wrap: wrap; }
+  .totals span { display: flex; align-items: center; gap: 4px; }
+  .totals .prot { color: #ff6b6b; }
+  .totals .carb { color: #feca57; }
+  .totals .fat { color: #55efc4; }
+  .totals .kcal { color: #a29bfe; }
+  summary { cursor: pointer; padding: 8px 0; font-size: 14px; color: #a29bfe; }
+  summary:hover { color: #feca57; }
+  .tips { background: #0f3460; border-radius: 10px; padding: 16px; margin: 20px 0 10px; }
+  .tips h3 { color: #feca57; font-size: 14px; margin-bottom: 8px; }
+  .tips ul { padding-left: 18px; font-size: 13px; line-height: 2; color: #c9d1d9; }
+  hr { border: none; border-top: 1px solid #2d3436; margin: 24px 0; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>🍽️ 两周增肌减肥菜单</h1>
+<div class="sub">适配 Strong · 90kg · 训练日 ~2600 kcal · 休息日 ~2200 kcal · 食材常见易买</div>
+
+<!-- Week 1 -->
+<div class="week-title"><span class="week-num">第一周</span> 训练 4 天 · 休息 3 天</div>
+
+<!-- Day 1 - Mon -->
+<div class="day-card train">
+  <div class="day-header">
+    <div class="day-name">第1天 · 周一 <span class="badge-red" style="margin-left:8px;">🏋️ 力量日 胸+三头</span></div>
+    <div class="day-type"><span class="badge-red">训练日 2600 kcal</span></div>
+  </div>
+  <div class="meals">
+    <div class="meal">
+      <div class="meal-label">🥣 早餐 8:00</div>
+      <div class="meal-content">全蛋 3 个 + 燕麦片 60g + 纯牛奶 200ml</div>
+      <div class="totals"><span class="prot">● 45g</span> <span class="carb">● 50g</span> <span class="fat">● 20g</span></div>
+    </div>
+    <div class="meal">
+      <div class="meal-label">🍱 午餐 12:30</div>
+      <div class="meal-content">米饭 200g + 番茄炒鸡胸 200g + 炒菠菜</div>
+      <div class="totals"><span class="prot">● 50g</span> <span class="carb">● 60g</span> <span class="fat">● 8g</span></div>
+    </div>
+    <div class="meal">
+      <div class="meal-label">🏋️ 练后餐 18:30 <span class="badge-red">必须吃</span></div>
+      <div class="meal-content"><span class="highlight">米饭 250g + 煎牛肉 150g + 炒青椒</span></div>
+      <div class="totals"><span class="prot">● 40g</span> <span class="carb">● 70g</span> <span class="fat">● 10g</span></div>
+    </div>
+    <div class="meal">
+      <div class="meal-label">🌙 晚餐 20:30</div>
+      <div class="meal-content">蒸红薯 150g + 白灼虾 120g + 凉拌黄瓜</div>
+      <div class="totals"><span class="prot">● 30g</span> <span class="carb">● 35g</span> <span class="fat">● 6g</span></div>
+    </div>
+  </div>
+  <div class="totals" style="margin-top:10px;"><span class="kcal">🔥 合计 ≈ 2670 kcal</span> <span class="prot">蛋白质 165g</span> <span class="carb">碳水 215g</span> <span class="fat">脂肪 44g</span></div>
+</div>
+
+<!-- Day 2 - Tue -->
+<div class="day-card rest">
+  <div class="day-header">
+    <div class="day-name">第2天 · 周二 <span class="badge-green" style="margin-left:8px;">🏊 游泳日</span></div>
+    <div class="day-type"><span class="badge-green">训练日 2400 kcal</span></div>
+  </div>
+  <div class="meals">
+    <div class="meal">
+      <div class="meal-label">🥣 早餐 8:00</div>
+      <div class="meal-content">全麦面包 2 片 + 煎蛋 2 个 + 无糖酸奶 1 杯</div>
+      <div class="totals"><span class="prot">● 25g</span> <span class="carb">● 35g</span> <span class="fat">● 15g</span></div>
+    </div>
+    <div class="meal">
+      <div class="meal-label">🍱 午餐 12:30</div>
+      <div class="meal-content">米饭 150g + 红烧鱼块 200g + 炒油麦菜</div>
+      <div class="totals"><span class="prot">● 45g</span> <span class="carb">● 45g</span> <span class="fat">● 10g</span></div>
+    </div>
+    <div class="meal">
+      <div class="meal-label">🏊 练后餐 18:30</div>
+      <div class="meal-content"><span class="green">米饭 150g + 卤鸡腿 1 个 + 炒西蓝花</span></div>
+      <div class="totals"><span class="prot">● 35g</span> <span class="carb">● 45g</span> <span class="fat">● 8g</span></div>
+    </div>
+    <div class="meal">
+      <div class="meal-label">🌙 晚餐 20:30</div>
+      <div class="meal-content">蒸南瓜 200g + 豆腐 150g + 凉拌海带丝</div>
+      <div class="totals"><span class="prot">● 20g</span> <span class="carb">● 25g</span> <span class="fat">● 8g</span></div>
+    </div>
+  </div>
+  <div class="totals" style="margin-top:10px;"><span class="kcal">🔥 合计 ≈ 2440 kcal</span> <span class="prot">蛋白质 125g</span> <span class="carb">碳水 150g</span> <span class="fat">脂肪 41g</span></div>
+</div>
+
+<!-- Day 3 - Wed -->
+<div class="day-card train">
+  <div class="day-header">
+    <div class="day-name">第3天 · 周三 <span class="badge-red" style="margin-left:8px;">🏋️ 力量日 背+二头</span></div>
+    <div class="day-type"><span class="badge-red">训练日 2600 kcal</span></div>
+  </div>
+  <div class="meals">
+    <div class="meal">
+      <div class="meal-label">🥣 早餐 8:00</div>
+      <div class="meal-content">水煮蛋 3 个 + 玉米 1 根 + 豆浆 1 杯</div>
+      <div class="totals"><span class="prot">● 30g</span> <span class="carb">● 45g</span> <span class="fat">● 12g</span></div>
+    </div>
+    <div class="meal">
+      <div class="meal-label">🍱 午餐 12:30</div>
+      <div class="meal-content">米饭 200g + 青椒炒瘦肉 200g + 炒豆芽</div>
+      <div class="totals"><span class="prot">● 50g</span> <span class="carb">● 60g</span> <span class="fat">● 10g</span></div>
+    </div>
+    <div class="meal">
+      <div class="meal-label">🏋️ 练后餐 18:30 <span class="badge-red">必须吃</span></div>
+      <div class="meal-content"><span class="highlight">馒头 2 个 + 蛋白粉 2 勺 + 香蕉 1 根</span></div>
+      <div class="totals"><span class="prot">● 50g</span> <span class="carb">● 75g</span> <span class="fat">● 4g</span></div>
+    </div>
+    <div class="meal">
+      <div class="meal-label">🌙 晚餐 20:30</div>
+      <div class="meal-content">蒸山药 150g + 鸡胸肉 150g + 蒜蓉生菜</div>
+      <div class="totals"><span class="prot">● 40g</span> <span class="carb">● 30g</span> <span class="fat">● 6g</span></div>
+    </div>
+  </div>
+  <div class="totals" style="margin-top:10px;"><span class="kcal">🔥 合计 ≈ 2640 kcal</span> <span class="prot">蛋白质 170g</span> <span class="carb">碳水 210g</span> <span class="fat">脂肪 32g</span></div>
+</div>
+
+<!-- Day 4 - Thu -->
+<div class="day-card train">
+  <div class="day-header">
+    <div class="day-name">第4天 · 周四 <span class="badge-red" style="margin-left:8px;">🏋️ 力量日 腿+核心</span></div>
+    <div class="day-type"><span class="badge-red">训练日 2600 kcal</span></div>
+  </div>
+  <div class="meals">
+    <div class="meal">
+      <div class="meal-label">🥣 早餐 8:00</div>
+      <div class="meal-content">皮蛋瘦肉粥（大米50g+瘦肉50g+皮蛋半个）+ 煮蛋1个</div>
+      <div class="totals"><span class="prot">● 25g</span> <span class="carb">● 40g</span> <span class="fat">● 10g</span></div>
+    </div>
+    <div class="meal">
+      <div class="meal-label">🍱 午餐 12:30</div>
+      <div class="meal-content">米饭 200g + 土豆烧牛肉 200g + 清炒白菜</div>
+      <div class="totals"><span class="prot">● 50g</span> <span class="carb">● 65g</span> <span class="fat">● 12g</span></div>
+    </div>
+    <div class="meal">
+      <div class="meal-label">🏋️ 练后餐 18:30 <span class="badge-red">必须吃</span></div>
+      <div class="meal-content"><span class="highlight">米饭 250g + 煎鸡腿排 200g + 炒洋葱</span></div>
+      <div class="totals"><span class="prot">● 45g</span> <span class="carb">● 70g</span> <span class="fat">● 12g</span></div>
+    </div>
+    <div class="meal">
+      <div class="meal-label">🌙 晚餐 20:30</div>
+      <div class="meal-content">蒸紫薯 120g + 清蒸鲈鱼 150g + 凉拌木耳</div>
+      <div class="totals"><span class="prot">● 35g</span> <span class="carb">● 30g</span> <span class="fat">● 6g</span></div>
+    </div>
+  </div>
+  <div class="totals" style="margin-top:10px;"><span class="kcal">🔥 合计 ≈ 2680 kcal</span> <span class="prot">蛋白质 155g</span> <span class="carb">碳水 205g</span> <span class="fat">脂肪 40g</span></div>
+</div>
+
+<!-- Day 5 - Fri -->
+<div class="day-card train">
+  <div class="day-header">
+    <div class="day-name">第5天 · 周五 <span class="badge-green" style="margin-left:8px;">🏊 游泳日</span></div>
+    <div class="day-type"><span class="badge-red">训练日 2500 kcal</span></div>
+  </div>
+  <div class="meals">
+    <div class="meal">
+      <div class="meal-label">🥣 早餐 8:00</div>
+      <div class="meal-content">红薯 200g + 水煮蛋 2 个 + 牛奶 200ml</div>
+      <div class="totals"><span class="prot">● 25g</span> <span class="carb">● 50g</span> <span class="fat">● 12g</span></div>
+    </div>
+    <div class="meal">
+      <div class="meal-label">🍱 午餐 12:30</div>
+      <div class="meal-content">米饭 150g + 宫保鸡丁（少油）200g + 炒空心菜</div>
+      <div class="totals"><span class="prot">● 45g</span> <span class="carb">● 50g</span> <span class="fat">● 12g</span></div>
+    </div>
+    <div class="meal">
+      <div class="meal-label">🏊 练后餐 18:30</div>
+      <div class="meal-content"><span class="green">米饭 150g + 煎秋刀鱼 1 条 + 炒芦笋</span></div>
+      <div class="totals"><span class="prot">● 35g</span> <span class="carb">● 45g</span> <span class="fat">● 10g</span></div>
+    </div>
+    <div class="meal">
+      <div class="meal-label">🌙 晚餐 20:30</div>
+      <div class="meal-content">玉米半根 + 虾仁豆腐汤（虾仁100g+豆腐100g）</div>
+      <div class="totals"><span class="prot">● 25g</span> <span class="carb">● 25g</span> <span class="fat">● 6g</span></div>
+    </div>
+  </div>
+  <div class="totals" style="margin-top:10px;"><span class="kcal">🔥 合计 ≈ 2490 kcal</span> <span class="prot">蛋白质 130g</span> <span class="carb">碳水 170g</span> <span class="fat">脂肪 40g</span></div>
+</div>
+
+<!-- Day 6 - Sat -->
+<div class="day-card rest">
+  <div class="day-header">
+    <div class="day-name">第6天 · 周六 <span class="badge-green" style="margin-left:8px;">🚴 休闲骑 / 休息</span></div>
+    <div class="day-type"><span class="badge-green">休息日 2200 kcal</span></div>
+  </div>
+  <div class="meals">
+    <div class="meal">
+      <div class="meal-label">🥣 早餐 9:00</div>
+      <div class="meal-content">燕麦片 50g + 水煮蛋 2 个 + 蓝莓一小把</div>
+      <div class="totals"><span class="prot">● 20g</span> <span class="carb">● 40g</span> <span class="fat">● 10g</span></div>
+    </div>
+    <div class="meal">
+      <div class="meal-label">🍱 午餐 13:00</div>
+      <div class="meal-content">米饭 150g + 红烧排骨 150g + 清炒苦瓜</div>
+      <div class="totals"><span class="prot">● 40g</span> <span class="carb">● 45g</span> <span class="fat">● 20g</span></div>
+    </div>
+    <div class="meal">
+      <div class="meal-label">🌙 晚餐 19:00</div>
+      <div class="meal-content">蒸南瓜 200g + 白切鸡 150g（去皮）+ 凉拌莴笋</div>
+      <div class="totals"><span class="prot">● 35g</span> <span class="carb">● 20g</span> <span class="fat">● 8g</span></div>
+    </div>
+    <div class="meal">
+      <div class="meal-label">🍎 加餐</div>
+      <div class="meal-content">苹果 1 个 + 核桃 2 个</div>
+      <div class="totals"><span class="prot">● 2g</span> <span class="carb">● 20g</span> <span class="fat">● 8g</span></div>
+    </div>
+  </div>
+  <div class="totals" style="margin-top:10px;"><span class="kcal">🔥 合计 ≈ 2210 kcal</span> <span class="prot">蛋白质 97g</span> <span class="carb">碳水 125g</span> <span class="fat">脂肪 46g</span></div>
+</div>
+
+<!-- Day 7 - Sun -->
+<div class="day-card rest">
+  <div class="day-header">
+    <div class="day-name">第7天 · 周日 <span class="badge-green" style="margin-left:8px;">🛌 完全休息</span></div>
+    <div class="day-type"><span class="badge-green">休息日 2100 kcal</span></div>
+  </div>
+  <div class="meals">
+    <div class="meal">
+      <div class="meal-label">🥣 早餐 9:00</div>
+      <div class="meal-content">荞麦面 100g + 煎蛋 1 个 + 青菜几颗</div>
+      <div class="totals"><span class="prot">● 15g</span> <span class="carb">● 45g</span> <span class="fat">● 10g</span></div>
+    </div>
+    <div class="meal">
+      <div class="meal-label">🍱 午餐 13:00</div>
+      <div class="meal-content">杂粮饭 150g + 蒜苗炒肉 150g + 炒茄子</div>
+      <div class="totals"><span class="prot">● 35g</span> <span class="carb">● 50g</span> <span class="fat">● 14g</span></div>
+    </div>
+    <div class="meal">
+      <div class="meal-label">🌙 晚餐 19:00</div>
+      <div class="meal-content">玉米排骨汤（排骨100g+玉米半根，少油）+ 炒菜心</div>
+      <div class="totals"><span class="prot">● 25g</span> <span class="carb">● 20g</span> <span class="fat">● 10g</span></div>
+    </div>
+    <div class="meal">
+      <div class="meal-label">🍎 加餐</div>
+      <div class="meal-content">无糖酸奶 1 杯 + 奇亚籽一勺</div>
+      <div class="totals"><span class="prot">● 8g</span> <span class="carb">● 10g</span> <span class="fat">● 4g</span></div>
+    </div>
+  </div>
+  <div class="totals" style="margin-top:10px;"><span class="kcal">🔥 合计 ≈ 2140 kcal</span> <span class="prot">蛋白质 83g</span> <span class="carb">碳水 125g</span> <span class="fat">脂肪 38g</span></div>
+</div>
+
+<hr>
+
+<!-- Week 2 -->
+<div class="week-title"><span class="week-num">第二周</span> 训练 5 天 · 休息 2 天</div>
+
+<!-- Day 8 - Mon -->
+<div class="day-card train">
+  <div class="day-header">
+    <div class="day-name">第8天 · 周一 <span class="badge-red" style="margin-left:8px;">🏋️ 力量日 胸+三头</span></div>
+    <div class="day-type"><span class="badge-red">训练日 2600 kcal</span></div>
+  </div>
+  <div class="meals">
+    <div class="meal">
+      <div class="meal-label">🥣 早餐 8:00</div>
+      <div class="meal-content">黑米饭 100g + 煎蛋 2 个 + 牛奶 200ml</div>
+      <div class="totals"><span class="prot">● 25g</span> <span class="carb">● 50g</span> <span class="fat">● 14g</span></div>
+    </div>
+    <div class="meal">
+      <div class="meal-label">🍱 午餐 12:30</div>
+      <div class="meal-content">米饭 200g + 洋葱炒牛肉 200g + 炒西葫芦</div>
+      <div class="totals"><span class="prot">● 55g</span> <span class="carb">● 60g</span> <span class="fat">● 12g</span></div>
+    </div>
+    <div class="meal">
+      <div class="meal-label">🏋️ 练后餐 18:30 <span class="badge-red">必须吃</span></div>
+      <div class="meal-content"><span class="highlight">米饭 250g + 红烧鸡块 200g + 炒豆角</span></div>
+      <div class="totals"><span class="prot">● 45g</span> <span class="carb">● 70g</span> <span class="fat">● 10g</span></div>
+    </div>
+    <div class="meal">
+      <div class="meal-label">🌙 晚餐 20:30</div>
+      <div class="meal-content">蒸芋头 120g + 蛤蜊蒸蛋（鸡蛋2个+蛤蜊100g）</div>
+      <div class="totals"><span class="prot">● 30g</span> <span class="carb">● 25g</span> <span class="fat">● 10g</span></div>
+    </div>
+  </div>
+  <div class="totals" style="margin-top:10px;"><span class="kcal">🔥 合计 ≈ 2660 kcal</span> <span class="prot">蛋白质 155g</span> <span class="carb">碳水 205g</span> <span class="fat">脂肪 46g</span></div>
+</div>
+
+<!-- Day 9 - Tue -->
+<div class="day-card train">
+  <div class="day-header">
+    <div class="day-name">第9天 · 周二 <span class="badge-green" style="margin-left:8px;">🏊 游泳日</span></div>
+    <div class="day-type"><span class="badge-green">训练日 2400 kcal</span></div>
+  </div>
+  <div class="meals">
+    <div class="meal">
+      <div class="meal-label">🥣 早餐 8:00</div>
+      <div class="meal-content">土豆丝蛋饼（土豆100g+蛋2个）+ 豆浆 1 杯</div>
+      <div class="totals"><span class="prot">● 20g</span> <span class="carb">● 35g</span> <span class="fat">● 12g</span></div>
+    </div>
+    <div class="meal">
+      <div class="meal-label">🍱 午餐 12:30</div>
+      <div class="meal-content">米饭 150g + 啤酒鸭（去皮）150g + 炒冬瓜</div>
+      <div class="totals"><span class="prot">● 40g</span> <span class="carb">● 45g</span> <span class="fat">● 14g</span></div>
+    </div>
+    <div class="meal">
+      <div class="meal-label">🏊 练后餐 18:30</div>
+      <div class="meal-content"><span class="green">馒头 1 个 + 卤牛肉 120g + 凉拌黄瓜</span></div>
+      <div class="totals"><span class="prot">● 35g</span> <span class="carb">● 40g</span> <span class="fat">● 6g</span></div>
+    </div>
+    <div class="meal">
+      <div class="meal-label">🌙 晚餐 20:30</div>
+      <div class="meal-content">煮玉米 1 根 + 皮蛋豆腐（豆腐150g+皮蛋半个）</div>
+      <div class="totals"><span class="prot">● 20g</span> <span class="carb">● 30g</span> <span class="fat">● 10g</span></div>
+    </div>
+  </div>
+  <div class="totals" style="margin-top:10px;"><span class="kcal">🔥 合计 ≈ 2410 kcal</span> <span class="prot">蛋白质 115g</span> <span class="carb">碳水 150g</span> <span class="fat">脂肪 42g</span></div>
+</div>
+
+<!-- Day 10 - Wed -->
+<div class="day-card train">
+  <div class="day-header">
+    <div class="day-name">第10天 · 周三 <span class="badge-red" style="margin-left:8px;">🏋️ 力量日 背+二头</span></div>
+    <div class="day-type"><span class="badge-red">训练日 2600 kcal</span></div>
+  </div>
+  <div class="meals">
+    <div class="meal">
+      <div class="meal-label">🥣 早餐 8:00</div>
+      <div class="meal-content">全麦三明治（全麦面包2片+煎蛋+生菜+火腿片）+ 牛奶</div>
+      <div class="totals"><span class="prot">● 25g</span> <span class="carb">● 40g</span> <span class="fat">● 14g</span></div>
+    </div>
+    <div class="meal">
+      <div class="meal-label">🍱 午餐 12:30</div>
+      <div class="meal-content">米饭 200g + 糖醋里脊（少糖版）200g + 炒包菜</div>
+      <div class="totals"><span class="prot">● 50g</span> <span class="carb">● 65g</span> <span class="fat">● 10g</span></div>
+    </div>
+    <div class="meal">
+      <div class="meal-label">🏋️ 练后餐 18:30 <span class="badge-red">必须吃</span></div>
+      <div class="meal-content"><span class="highlight">米饭 250g + 烤鸡胸 200g + 炒荷兰豆</span></div>
+      <div class="totals"><span class="prot">● 50g</span> <span class="carb">● 70g</span> <span class="fat">● 6g</span></div>
+    </div>
+    <div class="meal">
+      <div class="meal-label">🌙 晚餐 20:30</div>
+      <div class="meal-content">烤土豆 1 个 + 煎金鲳鱼 150g + 凉拌西红柿</div>
+      <div class="totals"><span class="prot">● 30g</span> <span class="carb">● 35g</span> <span class="fat">● 8g</span></div>
+    </div>
+  </div>
+  <div class="totals" style="margin-top:10px;"><span class="kcal">🔥 合计 ≈ 2670 kcal</span> <span class="prot">蛋白质 155g</span> <span class="carb">碳水 210g</span> <span class="fat">脂肪 38g</span></div>
+</div>
+
+<!-- Day 11 - Thu -->
+<div class="day-card train">
+  <div class="day-header">
+    <div class="day-name">第11天 · 周四 <span class="badge-red" style="margin-left:8px;">🏋️ 力量日 腿+核心</span></div>
+    <div class="day-type"><span class="badge-red">训练日 2600 kcal</span></div>
+  </div>
+  <div class="meals">
+    <div class="meal">
+      <div class="meal-label">🥣 早餐 8:00</div>
+      <div class="meal-content">蒸红薯 150g + 水煮蛋 2 个 + 牛奶 200ml</div>
+      <div class="totals"><span class="prot">● 22g</span> <span class="carb">● 40g</span> <span class="fat">● 12g</span></div>
+    </div>
+    <div class="meal">
+      <div class="meal-label">🍱 午餐 12:30</div>
+      <div class="meal-content">米饭 200g + 豆角焖排骨 200g + 炒芥蓝</div>
+      <div class="totals"><span class="prot">● 50g</span> <span class="carb">● 60g</span> <span class="fat">● 16g</span></div>
+    </div>
+    <div class="meal">
+      <div class="meal-label">🏋️ 练后餐 18:30 <span class="badge-red">必须吃</span></div>
+      <div class="meal-content"><span class="highlight">米饭 250g + 咖喱鸡胸 200g + 炒彩椒</span></div>
+      <div class="totals"><span class="prot">● 45g</span> <span class="carb">● 70g</span> <span class="fat">● 8g</span></div>
+    </div>
+    <div class="meal">
+      <div class="meal-label">🌙 晚餐 20:30</div>
+      <div class="meal-content">玉米糊 1 碗 + 凉拌鸡丝 100g + 炒韭黄</div>
+      <div class="totals"><span class="prot">● 25g</span> <span class="carb">● 30g</span> <span class="fat">● 6g</span></div>
+    </div>
+  </div>
+  <div class="totals" style="margin-top:10px;"><span class="kcal">🔥 合计 ≈ 2650 kcal</span> <span class="prot">蛋白质 142g</span> <span class="carb">碳水 200g</span> <span class="fat">脂肪 42g</span></div>
+</div>
+
+<!-- Day 12 - Fri -->
+<div class="day-card train">
+  <div class="day-header">
+    <div class="day-name">第12天 · 周五 <span class="badge-green" style="margin-left:8px;">🏊 游泳日</span></div>
+    <div class="day-type"><span class="badge-green">训练日 2400 kcal</span></div>
+  </div>
+  <div class="meals">
+    <div class="meal">
+      <div class="meal-label">🥣 早餐 8:00</div>
+      <div class="meal-content">南瓜粥 1 碗 + 水煮蛋 2 个 + 全麦面包 1 片</div>
+      <div class="totals"><span class="prot">● 18g</span> <span class="carb">● 45g</span> <span class="fat">● 10g</span></div>
+    </div>
+    <div class="meal">
+      <div class="meal-label">🍱 午餐 12:30</div>
+      <div class="meal-content">米饭 150g + 芹菜炒牛肉 150g + 炒油菜</div>
+      <div class="totals"><span class="prot">● 45g</span> <span class="carb">● 45g</span> <span class="fat">● 12g</span></div>
+    </div>
+    <div class="meal">
+      <div class="meal-label">🏊 练后餐 18:30</div>
+      <div class="meal-content"><span class="green">杂粮饭 150g + 清蒸带鱼 150g + 炒秋葵</span></div>
+      <div class="totals"><span class="prot">● 35g</span> <span class="carb">● 45g</span> <span class="fat">● 8g</span></div>
+    </div>
+    <div class="meal">
+      <div class="meal-label">🌙 晚餐 20:30</div>
+      <div class="meal-content">蒸土豆 1 个 + 煎豆腐 150g + 凉拌芹菜叶</div>
+      <div class="totals"><span class="prot">● 20g</span> <span class="carb">● 30g</span> <span class="fat">● 8g</span></div>
+    </div>
+  </div>
+  <div class="totals" style="margin-top:10px;"><span class="kcal">🔥 合计 ≈ 2450 kcal</span> <span class="prot">蛋白质 118g</span> <span class="carb">碳水 165g</span> <span class="fat">脂肪 38g</span></div>
+</div>
+
+<!-- Day 13 - Sat -->
+<div class="day-card rest">
+  <div class="day-header">
+    <div class="day-name">第13天 · 周六 <span class="badge-green" style="margin-left:8px;">🚴 休闲骑 / 休息</span></div>
+    <div class="day-type"><span class="badge-green">休息日 2200 kcal</span></div>
+  </div>
+  <div class="meals">
+    <div class="meal">
+      <div class="meal-label">🥣 早餐 9:00</div>
+      <div class="meal-content">小米粥 1 碗 + 煎蛋 2 个 + 坚果一小把</div>
+      <div class="totals"><span class="prot">● 18g</span> <span class="carb">● 30g</span> <span class="fat">● 16g</span></div>
+    </div>
+    <div class="meal">
+      <div class="meal-label">🍱 午餐 13:00</div>
+      <div class="meal-content">米饭 150g + 干煸四季豆炒肉末 150g + 紫菜蛋花汤</div>
+      <div class="totals"><span class="prot">● 35g</span> <span class="carb">● 50g</span> <span class="fat">● 14g</span></div>
+    </div>
+    <div class="meal">
+      <div class="meal-label">🌙 晚餐 19:00</div>
+      <div class="meal-content">蒸山药 150g + 盐水鸭（去皮）120g + 炒茼蒿</div>
+      <div class="totals"><span class="prot">● 30g</span> <span class="carb">● 30g</span> <span class="fat">● 12g</span></div>
+    </div>
+    <div class="meal">
+      <div class="meal-label">🍎 加餐</div>
+      <div class="meal-content">猕猴桃 1 个 + 原味腰果 20g</div>
+      <div class="totals"><span class="prot">● 4g</span> <span class="carb">● 15g</span> <span class="fat">● 10g</span></div>
+    </div>
+  </div>
+  <div class="totals" style="margin-top:10px;"><span class="kcal">🔥 合计 ≈ 2220 kcal</span> <span class="prot">蛋白质 87g</span> <span class="carb">碳水 125g</span> <span class="fat">脂肪 52g</span></div>
+</div>
+
+<!-- Day 14 - Sun -->
+<div class="day-card rest">
+  <div class="day-header">
+    <div class="day-name">第14天 · 周日 <span class="badge-green" style="margin-left:8px;">🛌 完全休息</span></div>
+    <div class="day-type"><span class="badge-green">休息日 2100 kcal</span></div>
+  </div>
+  <div class="meals">
+    <div class="meal">
+      <div class="meal-label">🥣 早餐 9:00</div>
+      <div class="meal-content">蒸玉米 1 根 + 水煮蛋 2 个 + 无糖酸奶 1 杯</div>
+      <div class="totals"><span class="prot">● 20g</span> <span class="carb">● 35g</span> <span class="fat">● 10g</span></div>
+    </div>
+    <div class="meal">
+      <div class="meal-label">🍱 午餐 13:00</div>
+      <div class="meal-content">杂粮饭 150g + 番茄鱼片汤（鱼片150g） + 炒佛手瓜</div>
+      <div class="totals"><span class="prot">● 40g</span> <span class="carb">● 50g</span> <span class="fat">● 8g</span></div>
+    </div>
+    <div class="meal">
+      <div class="meal-label">🌙 晚餐 19:00</div>
+      <div class="meal-content">蒸胡萝卜 100g + 烤鸡翅中 3 个（去皮）+ 凉拌金针菇</div>
+      <div class="totals"><span class="prot">● 30g</span> <span class="carb">● 20g</span> <span class="fat">● 12g</span></div>
+    </div>
+    <div class="meal">
+      <div class="meal-label">🍎 加餐</div>
+      <div class="meal-content">火龙果半个 + 纯牛奶 200ml</div>
+      <div class="totals"><span class="prot">● 8g</span> <span class="carb">● 20g</span> <span class="fat">● 8g</span></div>
+    </div>
+  </div>
+  <div class="totals" style="margin-top:10px;"><span class="kcal">🔥 合计 ≈ 2120 kcal</span> <span class="prot">蛋白质 98g</span> <span class="carb">碳水 125g</span> <span class="fat">脂肪 38g</span></div>
+</div>
+
+<hr>
+
+<div class="tips">
+  <h3>📌 执行说明</h3>
+  <ul>
+    <li><span class="badge-red">训练日</span> 练后餐必须吃，练后 30min 内补充</li>
+    <li>蛋白质不够时可加 1 勺蛋白粉（额外 +25g 蛋白）</li>
+    <li>蔬菜不限量，饿了多吃菜，不用计算热量</li>
+    <li>调料正常用（酱油/醋/姜蒜），少糖少油</li>
+    <li>食材全部在菜市场/超市能买到，无特殊食材</li>
+    <li>每周日早上空腹称重，记录变化</li>
+    <li>如果某天没吃够，不用第二天饿回来，回归正常即可</li>
+  </ul>
+</div>
+
+</div>
+</body>
+</html>
