@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>神经系统类型 · 多维评估</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #0f0f23; font-family: "PingFang SC","Microsoft YaHei",sans-serif;
+    display: flex; flex-direction: column; align-items: center;
+    padding: 20px; color: #e0e0e0;
+  }
+  h1 { font-size: 22px; margin-bottom: 4px; background: linear-gradient(90deg,#48dbfb,#a29bfe,#fd79a8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .subtitle { color: #888; font-size: 13px; margin-bottom: 16px; }
+  .main-card { max-width: 960px; width: 100%; }
+
+  /* Tabs */
+  .tabs { display: flex; gap: 6px; margin-bottom: 16px; flex-wrap: wrap; }
+  .tab {
+    background: #1a1a2e; border: 1px solid #2d3436; color: #888;
+    padding: 8px 18px; border-radius: 8px; cursor: pointer; font-size: 13px;
+    transition: all 0.2s; font-family: inherit;
+  }
+  .tab:hover { border-color: #6c5ce7; color: #ddd; }
+  .tab.active { background: #6c5ce7; color: #fff; border-color: #6c5ce7; }
+
+  .panel { display: none; background: #1a1a2e; border-radius: 14px; padding: 24px; }
+  .panel.active { display: block; animation: fadeIn 0.4s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* 评估问卷 */
+  .question { margin-bottom: 24px; background: #16213e; border-radius: 10px; padding: 16px; border: 1px solid #2d3436; }
+  .question .q-text { font-size: 14px; margin-bottom: 10px; line-height: 1.6; color: #e0e0e0; }
+  .question .q-tag { display: inline-block; font-size: 10px; padding: 2px 8px; border-radius: 10px; margin-bottom: 6px; }
+  .tag-hsp { background: #ff6b6b33; color: #ff6b6b; border: 1px solid #ff6b6b66; }
+  .tag-bis { background: #a29bfe33; color: #a29bfe; border: 1px solid #a29bfe66; }
+  .tag-ext { background: #55efc433; color: #55efc4; border: 1px solid #55efc466; }
+  .tag-bas { background: #feca5733; color: #feca57; border: 1px solid #feca5766; }
+  .tag-neu { background: #fd79a833; color: #fd79a8; border: 1px solid #fd79a866; }
+  .tag-poly { background: #74b9ff33; color: #74b9ff; border: 1px solid #74b9ff66; }
+
+  /* 选项按钮卡片 */
+  .opts { display: flex; gap: 6px; flex-wrap: wrap; }
+  .opt-btn {
+    flex: 1; min-width: 72px; text-align: center;
+    padding: 10px 6px; border-radius: 8px; border: 1.5px solid #2d3436;
+    background: #1a1a2e; color: #888; cursor: pointer; font-size: 13px;
+    transition: all 0.15s; user-select: none; font-family: inherit;
+  }
+  .opt-btn:hover { border-color: #6c5ce7; color: #ddd; background: #202040; }
+  .opt-btn.selected { border-color: #6c5ce7; background: #6c5ce7; color: #fff; box-shadow: 0 0 12px #6c5ce766; }
+  .opt-btn .num { font-size: 10px; opacity: 0.6; display: block; margin-top: 2px; }
+  .opt-btn.selected .num { opacity: 0.8; }
+
+  .btn {
+    background: #2d3436; color: #e0e0e0; border: none; padding: 8px 24px;
+    border-radius: 8px; cursor: pointer; font-size: 14px; transition: all 0.2s;
+    font-family: inherit;
+  }
+  .btn:hover { background: #3d4a56; transform: scale(1.03); }
+  .btn.primary { background: #6c5ce7; color: #fff; }
+  .btn.primary:hover { background: #7d6ff0; }
+
+  /* 结果 */
+  .result-section { margin-top: 20px; }
+  .result-row { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; flex-wrap: wrap; }
+  .result-label { width: 130px; font-size: 13px; color: #aaa; }
+  .result-bar-bg { flex: 1; min-width: 100px; height: 20px; background: #2d3436; border-radius: 10px; overflow: hidden; position: relative; }
+  .result-bar { height: 100%; border-radius: 10px; transition: width 1s ease; position: relative; }
+  .result-bar .bar-label { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); font-size: 11px; font-weight: bold; }
+  .result-score { width: 50px; font-size: 14px; font-weight: bold; text-align: right; }
+
+  /* 雷达图 */
+  #radarChart { width: 100%; max-width: 400px; margin: 20px auto; display: block; }
+
+  .profile-type { 
+    background: linear-gradient(135deg, #16213e, #1a1a3e); border-radius: 12px; 
+    padding: 20px; margin-top: 16px; border: 1px solid #2d3436;
+  }
+  .profile-type h3 { font-size: 18px; margin-bottom: 8px; }
+  .profile-type p { font-size: 13px; line-height: 1.8; color: #ccc; }
+  .profile-type .tag { display: inline-block; padding: 3px 12px; border-radius: 12px; font-size: 12px; margin: 4px 4px 4px 0; }
+
+  .method-card {
+    background: #16213e; border-radius: 10px; padding: 16px; margin-bottom: 14px;
+    border-left: 4px solid #6c5ce7;
+  }
+  .method-card h4 { color: #a29bfe; font-size: 14px; margin-bottom: 6px; }
+  .method-card h4 .lvl { font-size: 11px; color: #888; font-weight: normal; }
+  .method-card p { font-size: 13px; line-height: 1.7; color: #bbb; }
+  .method-card ul { margin: 6px 0; padding-left: 18px; }
+  .method-card li { font-size: 13px; line-height: 1.7; color: #bbb; }
+
+  .footer { margin-top: 20px; color: #555; font-size: 11px; }
+
+  @media (max-width: 600px) {
+    body { padding: 12px; }
+    h1 { font-size: 18px; }
+    .subtitle { font-size: 11px; }
+    .panel { padding: 14px; }
+    .question { padding: 12px; margin-bottom: 16px; }
+    .question .q-text { font-size: 13px; }
+
+    /* 选项按钮：窄屏时改为两行排列 */
+    .opts { gap: 4px; }
+    .opt-btn {
+      min-width: 0; flex: 1 1 30%; padding: 12px 4px;
+      font-size: 12px; -webkit-tap-highlight-color: transparent;
+    }
+    .opt-btn .num { font-size: 10px; }
+
+    /* 结果区 */
+    .result-label { width: 100%; font-size: 12px; }
+    .result-row { gap: 8px; margin-bottom: 10px; }
+    .result-bar-bg { height: 18px; min-width: 60px; }
+    .result-score { width: 40px; font-size: 13px; }
+
+    /* 底部按钮 */
+    .main-actions { flex-direction: column; align-items: stretch; gap: 8px; }
+    .main-actions .btn { width: 100%; }
+    #resetBtn { margin-left: 0 !important; }
+
+    /* Tab 按钮 */
+    .tab { flex: 1; text-align: center; padding: 10px 8px; font-size: 12px; }
+
+    /* 方法卡片 */
+    .method-card { padding: 12px; }
+    .method-card h4 { font-size: 13px; }
+    .method-card p, .method-card li { font-size: 12px; }
+
+    /* 画像区 */
+    .profile-type { padding: 14px; }
+    .profile-type h3 { font-size: 16px; }
+    .profile-type p { font-size: 12px; }
+
+    .footer { font-size: 10px; }
+  }
+
+  /* 极小屏（<380px）：选项按钮折行更彻底 */
+  @media (max-width: 380px) {
+    .opt-btn { flex: 1 1 45%; padding: 14px 6px; }
+  }
+
+  /* 触摸反馈优化 */
+  .opt-btn, .tab, .btn { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+</style>
+</head>
+<body>
+
+<h1>🧠 神经系统类型 · 多维评估</h1>
+<div class="subtitle">基于 SPS / RST / PEN / Polyvagal 四个理论框架 · 非诊断工具，仅供自我探索</div>
+
+<div class="main-card">
+  <div class="tabs">
+    <div class="tab active" data-tab="assess">📋 综合评估问卷</div>
+    <div class="tab" data-tab="methods">🔬 实验室判定方法</div>
+  </div>
+
+  <!-- ====== Panel 1: 问卷 ====== -->
+  <div class="panel active" id="panel-assess">
+    <div id="questions"><p style="text-align:center;color:#888;padding:40px 0;">⏳ 题目加载中…</p></div>
+    <div class="main-actions" style="text-align:center;margin-top:12px;">
+      <button class="btn primary" id="calcBtn" style="padding:10px 40px;font-size:15px;">📊 生成我的神经类型画像</button>
+      <button class="btn" id="resetBtn" style="margin-left:10px;">↺ 重置</button>
+    </div>
+
+    <!-- 结果区 -->
+    <div class="result-section" id="resultArea" style="display:none;">
+      <hr style="border-color:#2d3436;margin:20px 0;">
+      <h2 style="text-align:center;font-size:18px;margin-bottom:16px;">🧬 你的神经类型画像</h2>
+
+      <svg id="radarChart" viewBox="0 0 400 400"></svg>
+
+      <div id="profileType" class="profile-type"></div>
+
+      <div class="result-row"><span class="result-label">HSP 高敏感</span><div class="result-bar-bg"><div class="result-bar" id="bar-hsp" style="width:0%;background:linear-gradient(90deg,#ff6b6b,#ee5a24);"></div></div><span class="result-score" id="score-hsp">0</span></div>
+      <div class="result-row"><span class="result-label">BIS 行为抑制</span><div class="result-bar-bg"><div class="result-bar" id="bar-bis" style="width:0%;background:linear-gradient(90deg,#a29bfe,#6c5ce7);"></div></div><span class="result-score" id="score-bis">0</span></div>
+      <div class="result-row"><span class="result-label">BAS 行为趋近</span><div class="result-bar-bg"><div class="result-bar" id="bar-bas" style="width:0%;background:linear-gradient(90deg,#feca57,#f39c12);"></div></div><span class="result-score" id="score-bas">0</span></div>
+      <div class="result-row"><span class="result-label">外向性 (E)</span><div class="result-bar-bg"><div class="result-bar" id="bar-ext" style="width:0%;background:linear-gradient(90deg,#55efc4,#00b894);"></div></div><span class="result-score" id="score-ext">0</span></div>
+      <div class="result-row"><span class="result-label">神经质 (N)</span><div class="result-bar-bg"><div class="result-bar" id="bar-neu" style="width:0%;background:linear-gradient(90deg,#fd79a8,#e84393);"></div></div><span class="result-score" id="score-neu">0</span></div>
+      <div class="result-row"><span class="result-label">自主调节灵活</span><div class="result-bar-bg"><div class="result-bar" id="bar-poly" style="width:0%;background:linear-gradient(90deg,#74b9ff,#0984e3);"></div></div><span class="result-score" id="score-poly">0</span></div>
+    </div>
+  </div>
+
+  <!-- ====== Panel 2: 实验室方法 ====== -->
+  <div class="panel" id="panel-methods">
+    <h3 style="font-size:16px;margin-bottom:12px;color:#a29bfe;">🔬 科研与临床中用来"测量"神经类型的客观指标</h3>
+    <p style="font-size:13px;color:#888;margin-bottom:16px;">按从简单到复杂排序，括号内标注对应测量什么类型</p>
+
+    <div class="method-card">
+      <h4>① 惊跳反射 (Startle Response) <span class="lvl">— 反射级</span></h4>
+      <p>给受试者突然的噪音（通常 95dB 白噪声突声），用眼轮匝肌 EMG 记录眨眼强度。</p>
+      <ul>
+        <li><b style="color:#ff6b6b;">反应强且恢复慢</b> → 高神经质 / 高 BIS / HSP（杏仁核高反应）</li>
+        <li><b style="color:#55efc4;">反应弱且恢复快</b> → 低敏感 / 低神经质</li>
+      </ul>
+    </div>
+
+    <div class="method-card">
+      <h4>② 皮肤电导反应 (SCR) <span class="lvl">— 自主神经级</span></h4>
+      <p>测量手心汗腺的极微小出汗（交感神经驱动）。给情绪刺激或中性刺激。</p>
+      <ul>
+        <li><b style="color:#ff6b6b;">基线电导高 + 反应幅度大</b> → HSP / 高神经质 / 交感主导</li>
+        <li><b style="color:#55efc4;">基线低 + 反应小</b> → 低敏感 / 蒲公英型</li>
+        <li><b style="color:#74b9ff;">刺激后快速回落到基线</b> → 腹侧迷走调节好（自主灵活性高）</li>
+      </ul>
+    </div>
+
+    <div class="method-card">
+      <h4>③ 心率变异性 (HRV) <span class="lvl">— 自主神经调节级</span></h4>
+      <p>通过 ECG 记录逐次心跳间隔的变异。高频 HRV（0.15-0.4Hz）反映副交感（迷走）活性。</p>
+      <ul>
+        <li><b style="color:#55efc4;">高静息 HRV + 任务时适度下降</b> → 腹侧迷走占优、情绪调节好</li>
+        <li><b style="color:#ff6b6b;">低 HRV + 过度下降</b> → 交感为主、易过载（常见于 HSP）</li>
+        <li><b style="color:#636e72;">HRV 长期极低</b> → 背侧迷走冻结型</li>
+      </ul>
+    </div>
+
+    <div class="method-card">
+      <h4>④ EEG / ERP <span class="lvl">— 皮层电活动级</span></h4>
+      <p>用脑电图记录事件相关电位（ERP），特别是：</p>
+      <ul>
+        <li><b style="color:#a29bfe;">P300 波幅大</b> — 对新异刺激意外大 → 深度加工（HSP）</li>
+        <li><b style="color:#55efc4;">静息 α 波不对称（左前额 > 右前额）</b> → 趋近倾向 / 高 BAS</li>
+        <li><b style="color:#ff6b6b;">右前额 α 弱（即右前额更活跃）</b> → 回避倾向 / 高 BIS / 高神经质</li>
+        <li><b style="color:#feca57;">听觉脑干反应 (ABR) 阈值低</b> — 感觉门控开放大 → HSP</li>
+      </ul>
+    </div>
+
+    <div class="method-card">
+      <h4>⑤ fMRI <span class="lvl">— 脑功能定位级</span></h4>
+      <p>上面所有维度的最终验证：</p>
+      <ul>
+        <li><b style="color:#ff6b6b;">前脑岛 + ACC + PFC 对他人情绪图片反应更强</b> → HSP</li>
+        <li><b style="color:#feca57;">伏隔核 / 腹侧被盖区对奖励线索反应强</b> → 高 BAS / 高感觉寻求</li>
+        <li><b style="color:#a29bfe;">杏仁核对恐惧面孔反应强 + 与 PFC 连接弱</b> → 高神经质 / 高 BIS</li>
+        <li><b style="color:#55efc4;">DMN 在休息时连接弱</b> → 低内向 / 低反思</li>
+      </ul>
+    </div>
+
+    <div class="method-card">
+      <h4>⑥ 量化脑电图 (qEEG) + 微状态分析 <span class="lvl">— 网络动态级</span></h4>
+      <p>分析静息态下 EEG 微状态（微秒级脑网络切换模式）：</p>
+      <ul>
+        <li><b>微状态 C（突显网络）占比高 + 切换慢</b> → HSP — 沉浸在深度加工中，不易转移注意力</li>
+        <li><b>微状态 D（注意力网络）切换快</b> → 低敏感 / 高外向</li>
+      </ul>
+    </div>
+
+    <div style="background:#16213e;border-radius:10px;padding:16px;margin-top:8px;border-left:4px solid #feca57;">
+      <p style="font-size:13px;color:#ccc;line-height:1.8;">
+      ⚡ <b style="color:#feca57;">现实中，个体差异是连续谱而非二分</b>——HSP vs 非HSP，内向 vs 外向，都不是"有/无"的关系。
+      大多数人是在五个维度上各自落在某个位置，组合成独特的神经模式。
+      <b style="color:#a29bfe;">本页的问卷可以让你用 5 分钟大致了解自己的倾向。</b>
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="footer">参考: Aron(1997) · Gray(1982) · Eysenck(1967) · Porges(2011) · Kagan(1994)</div>
+
+<script>
+// ====== 问卷数据 ======
+const questions = [
+  { text: "我很容易注意到环境中的细微变化（气味、光线、温度）", dim: "hsp" },
+  { text: "声音大、人多、强光的环境会让我很快感到疲惫", dim: "hsp" },
+  { text: "我对别人的情绪变化非常敏感，能感觉到“气氛不对”", dim: "hsp" },
+  { text: "我做决定前会想很多，甚至反复思考同一件事", dim: "hsp" },
+  { text: "艺术、音乐、电影能带给我很强的情绪反应", dim: "hsp" },
+
+  { text: "遇到不确定的事情，我会先停下来观察再做决定", dim: "bis" },
+  { text: "我害怕犯错，会尽量避免可能的负面评价", dim: "bis" },
+  { text: "陌生环境/新人面前我比较拘谨", dim: "bis" },
+  { text: "我经常担心不好的事情会发生", dim: "bis" },
+
+  { text: "我喜欢追求新的体验和冒险", dim: "bas" },
+  { text: "当我想要某样东西时，我会立刻行动去争取", dim: "bas" },
+  { text: "拿到奖励或获得认可会让我充满干劲", dim: "bas" },
+  { text: "我经常冲动地做一些决定", dim: "bas" },
+
+  { text: "跟人在一起能给我能量，我喜欢热闹的社交场合", dim: "ext" },
+  { text: "我比大多数人更喜欢说话", dim: "ext" },
+  { text: "独处太久我会觉得闷", dim: "ext" },
+
+  { text: "我容易焦虑和紧张", dim: "neu" },
+  { text: "一点小事就能影响我一天的心情", dim: "neu" },
+  { text: "我的情绪起伏比较大", dim: "neu" },
+  { text: "我经常觉得累，即使没做什么事", dim: "neu" },
+
+  { text: "紧张之后能较快恢复平静（例如深呼吸几次就能放松）", dim: "poly" },
+  { text: "面对压力时，我有清晰的方式让自己冷静下来", dim: "poly" },
+  { text: "我在社交中感到安全自在，能与他人轻松交流", dim: "poly" },
+  { text: "我的睡眠质量比较好，容易入睡", dim: "poly" },
+];
+
+// 存储答案
+const answers = new Array(questions.length).fill(0);
+const ansLabels = ['完全不符','不太符','中等','比较符','完全符合'];
+
+// ====== 渲染问卷（脚本在 body 底部，DOM 已就绪） ======
+(function renderQuestions() {
+  const qContainer = document.getElementById('questions');
+  if (!qContainer) {
+    console.error('错误：找不到 #questions 容器');
+    return;
+  }
+  // 清空加载占位
+  qContainer.innerHTML = '';
+  questions.forEach((q, i) => {
+    const div = document.createElement('div');
+    div.className = 'question';
+    const tagMap = { hsp:'tag-hsp HSP', bis:'tag-bis BIS', bas:'tag-bas BAS', ext:'tag-ext 外向性', neu:'tag-neu 神经质', poly:'tag-poly 自主调节' };
+    const [tclass, tlabel] = tagMap[q.dim].split(' ');
+    let optsHtml = '';
+    for (let v = 1; v <= 5; v++) {
+      optsHtml += `<div class="opt-btn" data-q="${i}" data-v="${v}">${ansLabels[v-1]}<span class="num">${v}</span></div>`;
+    }
+    div.innerHTML = `
+      <span class="q-tag ${tclass}">${tlabel}</span>
+      <div class="q-text">${i+1}. ${q.text}</div>
+      <div class="opts">${optsHtml}</div>`;
+    qContainer.appendChild(div);
+  });
+
+  // 选项点击事件 — 使用委托监听，更可靠
+  qContainer.addEventListener('click', function(e) {
+    const btn = e.target.closest('.opt-btn');
+    if (!btn) return;
+    const qIdx = parseInt(btn.dataset.q);
+    const val = parseInt(btn.dataset.v);
+    answers[qIdx] = val;
+    // 同组兄弟取消选中
+    btn.parentElement.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+  });
+})();
+
+// ====== 计算结果 ======
+function calc() {
+  const sums = { hsp:0, bis:0, bas:0, ext:0, neu:0, poly:0 };
+  const counts = { hsp:5, bis:4, bas:4, ext:3, neu:4, poly:4 };
+
+  questions.forEach((q, i) => {
+    const val = answers[i];
+    if (!val || val === 0) return;
+    sums[q.dim] += val;
+  });
+
+  // 检查是否全部填写
+  let missing = false;
+  for (let d of ['hsp','bis','bas','ext','neu','poly']) {
+    if (sums[d] === 0) missing = true;
+  }
+  if (missing) {
+    // 找出未填的题号
+    const unfilled = [];
+    questions.forEach((q, i) => { if (!answers[i]) unfilled.push(i+1); });
+    const msg = unfilled.length === 1 ? `第 ${unfilled[0]} 题还没选，点一下选项卡片就好` :
+      `还有 ${unfilled.length} 题没选：第 ${unfilled.join('、')} 题`;
+    alert(msg);
+    return null;
+  }
+
+  // 归一化到 0-100%
+  const scores = {};
+  for (let d of ['hsp','bis','bas','ext','neu','poly']) {
+    const max = counts[d] * 5;
+    const min = counts[d] * 1;
+    scores[d] = Math.round(((sums[d] - min) / (max - min)) * 100);
+  }
+  return scores;
+}
+
+function renderResult(scores) {
+  document.getElementById('resultArea').style.display = 'block';
+
+  // 更新进度条（带延迟动画）
+  for (let d of ['hsp','bis','bas','ext','neu','poly']) {
+    const bar = document.getElementById(`bar-${d}`);
+    const score = document.getElementById(`score-${d}`);
+    setTimeout(() => { bar.style.width = scores[d] + '%'; }, 100);
+    score.textContent = scores[d] + '%';
+  }
+
+  // 绘制雷达图
+  drawRadar(scores);
+
+  // 生成类型描述
+  const profile = getProfile(scores);
+  document.getElementById('profileType').innerHTML = profile;
+}
+
+function getProfile(s) {
+  const lines = [];
+
+  // 主标签
+  const isHSP = s.hsp >= 65;
+  const isBIS = s.bis >= 65;
+  const isBAS = s.bas >= 65;
+  const isExt = s.ext >= 60;
+  const isInt = s.ext <= 40;
+  const isNeu = s.neu >= 60;
+  const isLowReg = s.poly <= 35;
+  const isHighReg = s.poly >= 65;
+
+  const tags = [];
+  if (isHSP) tags.push('<span class="tag" style="background:#ff6b6b33;color:#ff6b6b;border:1px solid #ff6b6b66;">🪷 高敏感 (HSP)</span>');
+  else if (s.hsp <= 35) tags.push('<span class="tag" style="background:#55efc433;color:#55efc4;border:1px solid #55efc466;">🌻 蒲公英型 (低敏感)</span>');
+  else tags.push('<span class="tag" style="background:#feca5733;color:#feca57;border:1px solid #feca5766;">🌷 郁金香型 (中等敏感)</span>');
+
+  if (isBIS && !isBAS) tags.push('<span class="tag" style="background:#a29bfe33;color:#a29bfe;border:1px solid #a29bfe66;">🧮 BIS 主导：谨慎型</span>');
+  else if (isBAS && !isBIS) tags.push('<span class="tag" style="background:#feca5733;color:#feca57;border:1px solid #feca5766;">⚡ BAS 主导：趋近型</span>');
+  else if (isBIS && isBAS) tags.push('<span class="tag" style="background:#ff767533;color:#ff7675;border:1px solid #ff767566;">⚖️ BAS/BIS 双高：高冲突型</span>');
+
+  if (isExt) tags.push('<span class="tag" style="background:#55efc433;color:#55efc4;border:1px solid #55efc466;">👥 外向型</span>');
+  else if (isInt) tags.push('<span class="tag" style="background:#74b9ff33;color:#74b9ff;border:1px solid #74b9ff66;">📚 内向型</span>');
+  else tags.push('<span class="tag" style="background:#dfe6e933;color:#dfe6e9;border:1px solid #dfe6e966;">🔄 中向型 (Ambivert)</span>');
+
+  if (isNeu) tags.push('<span class="tag" style="background:#fd79a833;color:#fd79a8;border:1px solid #fd79a866;">🌊 高情绪反应型</span>');
+  
+  if (isHighReg) tags.push('<span class="tag" style="background:#74b9ff33;color:#74b9ff;border:1px solid #74b9ff66;">🧘 自主调节灵活型</span>');
+  else if (isLowReg) tags.push('<span class="tag" style="background:#636e7233;color:#636e72;border:1px solid #636e7266;">🔒 自主调节紧绷型</span>');
+
+  // 综合类型
+  let mainType = '';
+  let mainDesc = '';
+
+  if (isHSP && isInt && isBIS && isNeu) {
+    mainType = '🪷 典型高敏感型 (HSP)';
+    mainDesc = `你的神经系统倾向于"深度加工 + 低阈值"模式。前脑岛、ACC、杏仁核基线活跃度高于平均水平。<br><br>
+    <b>优势</b>：感知力强、共情力高、创造力丰富、能察觉别人忽略的细节。<br>
+    <b>挑战</b>：容易感官过载、社交后需要独处恢复、对批评和冲突特别敏感。<br>
+    <b>建议</b>：控制信息输入量、每天留出"无刺激时间"、用正念训练腹侧迷走调节。`;
+  } else if (isHSP && isBAS && !isBIS) {
+    mainType = '🎭 高敏感探索型 (HSP + HSS)';
+    mainDesc = `你是"矛盾综合体"——既有高敏感的深度加工，又有追求刺激的驱动力。BIS 和 BAS 都高。<br><br>
+    <b>优势</b>：既有敏感者的深度，又有冒险者的勇气——适合创造性工作需要"深度+突破"的人。<br>
+    <b>挑战</b>：容易陷入"想要刺激但被刺激淹没"的循环。<br>
+    <b>建议</b>：寻找"可控的冒险"（如深度旅行、艺术创作、研究探索），替代社交性/高感官刺激。`;
+  } else if (!isHSP && isExt && isBAS && !isNeu) {
+    mainType = '🌻 蒲公英型 (低敏感 + 高外向)';
+    mainDesc = `你的神经系统基线唤醒低、杏仁核反应温和，来自环境的干扰很难动摇你。<br><br>
+    <b>优势</b>：抗压能力强、社交能量充沛、适应新环境快。<br>
+    <b>挑战</b>：可能不太容易理解为什么别人"想太多"；对细节不够敏感。<br>
+    <b>建议</b>：在某些需要细致感的场景中刻意放慢节奏。`;
+  } else if (isInt && isBIS && s.hsp < 60 && !isNeu) {
+    mainType = '🧊 低敏感内向型 (安静而稳定)';
+    mainDesc = `你不喜欢大量社交，但不是因为敏感或焦虑——你只是偏好安静和独处。神经系统属于"稳定低唤醒"模式。<br><br>
+    <b>优势</b>：独立、专注、情绪稳定、不容易被环境扰动。<br>
+    <b>挑战</b>：可能被误解为冷漠或不合群。<br>
+    <b>建议</b>：保持适合自己的生活节奏，不必为了"热闹"改变自己。`;
+  } else if (isNeu && !isHSP && isBIS) {
+    mainType = '🌊 高情绪反应型 (高神经质)';
+    mainDesc = `你的边缘系统（杏仁核 + 海马）基线活跃度偏高，对威胁和负面信息敏感。<br><br>
+    <b>优势</b>：警觉性高、谨慎、很少冒不必要的风险。<br>
+    <b>挑战</b>：容易焦虑、担忧、陷入反刍思维。<br>
+    <b>建议</b>：规律运动（提升 BDNF）、正念呼吸（增强前额叶对杏仁核的抑制）。`;
+  } else if (isHighReg && s.neu < 50 && s.hsp < 60) {
+    mainType = '🧘 弹性调节型 (自主神经灵活)';
+    mainDesc = `你的腹侧迷走系统运作良好——在安全时能放松社交，在危险时能有效应对，在压力后能快速恢复。<br><br>
+    <b>优势</b>：这是最"理想"的神经系统状态——适应性强、情绪恢复快。<br>
+    <b>挑战</b>：可能不太理解为什么别人那么容易"崩掉"——共情上需要注意。<br>
+    <b>建议</b>：你的调节能力本身就是一种资源——在他人需要时可以成为支持者。`;
+  } else {
+    mainType = '🧩 混合型 (多维度组合)';
+    mainDesc = `你的神经画像不是典型的单一类型，而是多个维度的独特组合。<br><br>
+    <b>你的维度分布</b>：
+    ${s.hsp >= 50 ? '• HSP 维度偏高——你对细节和情绪有较强感知' : '• HSP 维度偏低——你不容易被细微刺激扰动'}<br>
+    ${s.bis >= 50 ? '• 你偏向谨慎决策，会先观察再行动' : '• 你偏向大胆行动，不太犹豫'}<br>
+    ${s.bas >= 50 ? '• 你对奖励和机会有强烈的追求动力' : '• 你对奖励刺激的反应相对温和'}<br>
+    ${s.ext >= 50 ? '• 社交能给你补充能量' : '• 独处能给你补充能量'}<br>
+    ${s.neu >= 50 ? '• 你的情绪反应偏强，容易被小事影响' : '• 你的情绪状态比较稳定'}<br>
+    ${s.poly >= 50 ? '• 你的自主调节能力较好，压力后能较快恢复' : '• 你的自主调节偏紧绷，需要刻意放松训练'}<br><br>
+    <b>建议</b>：不用把自己框进任何标签——你的独特性就是你的优势。`;
+  }
+
+  return `
+    <h3 style="color:#a29bfe;">${mainType}</h3>
+    <div style="margin:10px 0;">${tags.join(' ')}</div>
+    <p>${mainDesc}</p>
+  `;
+}
+
+// ====== 雷达图 ======
+function drawRadar(s) {
+  const svg = document.getElementById('radarChart');
+  const w = 400, h = 400, cx = 200, cy = 200, r = 150;
+  const levels = 5;
+  const dims = [
+    { key:'hsp', label:'HSP\n高敏感' },
+    { key:'bis', label:'BIS\n行为抑制' },
+    { key:'bas', label:'BAS\n行为趋近' },
+    { key:'ext', label:'外向性\n(E)' },
+    { key:'neu', label:'神经质\n(N)' },
+    { key:'poly', label:'自主调节\n灵活度' },
+  ];
+  const n = dims.length;
+  const angleStep = (2 * Math.PI) / n;
+
+  let html = '';
+
+  // 背景网格
+  for (let lvl = 1; lvl <= levels; lvl++) {
+    const lr = (r / levels) * lvl;
+    let pts = '';
+    for (let i = 0; i < n; i++) {
+      const a = -Math.PI/2 + i * angleStep;
+      const x = cx + lr * Math.cos(a);
+      const y = cy + lr * Math.sin(a);
+      pts += `${i === 0 ? 'M' : 'L'}${x.toFixed(1)},${y.toFixed(1)}`;
+    }
+    html += `<path d="${pts}Z" fill="none" stroke="#2d3436" stroke-width="${lvl === levels ? 1 : 0.5}" opacity="0.6"/>`;
+  }
+
+  // 轴线
+  for (let i = 0; i < n; i++) {
+    const a = -Math.PI/2 + i * angleStep;
+    const x = cx + r * Math.cos(a);
+    const y = cy + r * Math.sin(a);
+    html += `<line x1="${cx}" y1="${cy}" x2="${x.toFixed(1)}" y2="${y.toFixed(1)}" stroke="#2d3436" stroke-width="0.5"/>`;
+  }
+
+  // 数据多边形
+  let dataPts = '';
+  for (let i = 0; i < n; i++) {
+    const a = -Math.PI/2 + i * angleStep;
+    const val = s[dims[i].key] / 100 * r;
+    const x = cx + val * Math.cos(a);
+    const y = cy + val * Math.sin(a);
+    dataPts += `${i === 0 ? 'M' : 'L'}${x.toFixed(1)},${y.toFixed(1)}`;
+  }
+  dataPts += 'Z';
+  html += `<path d="${dataPts}" fill="#6c5ce7" fill-opacity="0.3" stroke="#a29bfe" stroke-width="2"/>`;
+
+  // 数据点
+  for (let i = 0; i < n; i++) {
+    const a = -Math.PI/2 + i * angleStep;
+    const val = s[dims[i].key] / 100 * r;
+    const x = cx + val * Math.cos(a);
+    const y = cy + val * Math.sin(a);
+    html += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="5" fill="#a29bfe" stroke="#fff" stroke-width="1.5"/>`;
+  }
+
+  // 标签
+  for (let i = 0; i < n; i++) {
+    const a = -Math.PI/2 + i * angleStep;
+    const lr = r + 30;
+    const x = cx + lr * Math.cos(a);
+    const y = cy + lr * Math.sin(a);
+    const lines = dims[i].label.split('\n');
+    let tY = y - (lines.length-1)*8;
+    lines.forEach((line, li) => {
+      html += `<text x="${x.toFixed(1)}" y="${(tY + li*16).toFixed(1)}" text-anchor="middle" font-size="11" fill="#aaa" font-weight="bold">${line}</text>`;
+    });
+  }
+
+  // 百分比数值标注
+  for (let i = 0; i < n; i++) {
+    const a = -Math.PI/2 + i * angleStep;
+    const val = s[dims[i].key] / 100 * r;
+    const x = cx + val * Math.cos(a);
+    const y = cy + val * Math.sin(a);
+    // 偏移一点
+    const ox = 8 * Math.cos(a), oy = 8 * Math.sin(a);
+    html += `<text x="${(x+ox).toFixed(1)}" y="${(y+oy-4).toFixed(1)}" text-anchor="middle" font-size="11" fill="#fff" font-weight="bold">${s[dims[i].key]}%</text>`;
+  }
+
+  svg.innerHTML = html;
+}
+
+// ====== 按钮事件 ======
+document.getElementById('calcBtn').addEventListener('click', () => {
+  const scores = calc();
+  if (scores) renderResult(scores);
+  document.getElementById('resultArea').scrollIntoView({ behavior:'smooth', block:'start' });
+});
+
+document.getElementById('resetBtn').addEventListener('click', () => {
+  for (let i = 0; i < answers.length; i++) answers[i] = 0;
+  document.querySelectorAll('.opt-btn.selected').forEach(el => el.classList.remove('selected'));
+  document.getElementById('resultArea').style.display = 'none';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+// ====== Tab 切换 ======
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('panel-' + tab.dataset.tab).classList.add('active');
+  });
+});
+</script>
+</body>
+</html>

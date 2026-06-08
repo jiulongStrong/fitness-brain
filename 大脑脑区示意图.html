@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>人大脑脑区示意图</title>
+<style>
+  body { background: #f5f6fa; font-family: "PingFang SC", "Microsoft YaHei", sans-serif; display: flex; flex-direction: column; align-items: center; padding: 20px; margin: 0; }
+  h1 { color: #2d3436; font-size: 24px; margin-bottom: 6px; }
+  .subtitle { color: #636e72; font-size: 14px; margin-bottom: 20px; }
+  .container { display: flex; flex-wrap: wrap; justify-content: center; gap: 24px; max-width: 1100px; }
+  .card { background: #fff; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); padding: 16px; }
+  .card h2 { text-align: center; color: #2d3436; font-size: 16px; margin: 0 0 8px 0; }
+  svg { display: block; }
+  .legend { max-width: 320px; line-height: 1.7; font-size: 13px; color: #2d3436; margin-top: 20px; }
+  .legend-item { display: flex; align-items: center; gap: 8px; margin: 4px 0; }
+  .legend-dot { width: 16px; height: 16px; border-radius: 4px; flex-shrink: 0; }
+  .footer { margin-top: 24px; color: #b2bec3; font-size: 12px; }
+</style>
+</head>
+<body>
+
+<h1>人大脑主要脑区示意图</h1>
+<div class="subtitle">侧面观 + 内侧面观 + 水平截面（点击图片可放大）</div>
+
+<div class="container">
+
+  <!-- 图1：大脑侧面观 -->
+  <div class="card">
+    <h2>侧面观（外侧面）</h2>
+    <svg width="480" height="360" viewBox="0 0 480 360" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="shadow" x="-2%" y="-2%" width="104%" height="104%">
+          <feDropShadow dx="0" dy="1" stdDeviation="2" flood-opacity="0.15"/>
+        </filter>
+        <marker id="arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+          <path d="M0,0 L8,3 L0,6 Z" fill="#636e72"/>
+        </marker>
+      </defs>
+
+      <!-- 大脑轮廓（侧面） -->
+      <path d="M80,80 Q120,30 200,25 Q280,20 340,40 Q400,60 430,100 
+               Q460,140 460,180 Q460,220 440,250 Q420,280 380,290 
+               Q340,300 300,295 Q260,290 230,280 Q200,270 180,260
+               L170,240 Q140,210 120,180 Q95,160 80,140 Q65,120 70,100 Z"
+            fill="#dfe6e9" stroke="#636e72" stroke-width="2" filter="url(#shadow)"/>
+
+      <!-- 额叶 (Frontal Lobe) -->
+      <path d="M80,80 Q120,30 200,25 Q240,24 270,35 Q280,40 285,60
+               Q290,80 280,95 Q270,105 260,110 Q245,120 230,140
+               Q215,160 200,175 Q185,190 170,200 Q155,210 140,210
+               Q120,205 100,190 Q85,170 75,145 Q65,120 70,100 Z"
+            fill="#FF6B6B" fill-opacity="0.55" stroke="#e74c3c" stroke-width="1.5"/>
+
+      <!-- 顶叶 (Parietal Lobe) -->
+      <path d="M270,35 Q280,40 285,60 Q290,80 280,95 Q270,105 260,110
+               Q245,120 230,140 Q215,160 200,175 Q185,190 170,200
+               Q180,200 190,210 Q200,220 210,230 
+               Q230,240 250,245 Q270,250 290,240
+               Q310,230 330,215 Q350,200 365,180
+               Q375,160 375,140 Q375,120 365,100
+               Q350,80 330,65 Q310,50 290,40 Z"
+            fill="#74B9FF" fill-opacity="0.5" stroke="#2980b9" stroke-width="1.5"/>
+
+      <!-- 颞叶 (Temporal Lobe) -->
+      <path d="M170,200 Q185,210 200,222 Q215,235 230,248 
+               Q245,258 260,265 Q270,270 280,268
+               Q270,275 260,278 Q245,282 230,280
+               Q215,278 200,270 Q185,260 175,245
+               Q165,230 160,215 Z"
+            fill="#A29BFE" fill-opacity="0.55" stroke="#6c5ce7" stroke-width="1.5"/>
+
+      <!-- 枕叶 (Occipital Lobe) -->
+      <path d="M365,100 Q375,120 375,145 Q375,170 365,190
+               Q355,210 340,225 Q325,240 305,248
+               Q315,245 325,235 Q340,220 355,200
+               Q375,175 390,150 Q405,125 410,105
+               Q415,90 410,75 Q400,60 385,50 Z"
+            fill="#55EFC4" fill-opacity="0.5" stroke="#00b894" stroke-width="1.5"/>
+
+      <!-- 小脑 (Cerebellum) -->
+      <path d="M370,220 Q390,210 405,215 Q420,220 425,235
+               Q430,250 425,270 Q420,290 405,300
+               Q390,310 375,305 Q360,300 350,285
+               Q340,270 345,250 Q350,235 360,225 Z"
+            fill="#FDCB6E" fill-opacity="0.7" stroke="#e17055" stroke-width="1.5"/>
+
+      <!-- 脑干 (Brainstem) -->
+      <path d="M390,290 Q400,300 405,320 Q408,340 405,350
+               Q400,355 390,350 Q385,340 383,320
+               Q382,305 385,295 Z"
+            fill="#FAB1A0" fill-opacity="0.7" stroke="#d63031" stroke-width="1.5"/>
+
+      <!-- 中央沟 (Central Sulcus) -->
+      <path d="M270,38 Q265,70 255,100 Q245,130 230,155 Q220,170 210,180"
+            fill="none" stroke="#2d3436" stroke-width="2" stroke-dasharray="6,3"/>
+
+      <!-- 外侧裂 (Sylvian Fissure) -->
+      <path d="M160,210 Q175,200 195,192 Q220,185 250,185 Q280,185 310,195 Q340,205 360,225"
+            fill="none" stroke="#2d3436" stroke-width="1.5" stroke-dasharray="5,3"/>
+
+      <!-- Broca区标注 -->
+      <circle cx="155" cy="130" r="22" fill="none" stroke="#e74c3c" stroke-width="2" stroke-dasharray="4,2"/>
+      <line x1="155" y1="108" x2="155" y2="85" stroke="#e74c3c" stroke-width="1.5" marker-end="url(#arrow)"/>
+      <text x="125" y="78" font-size="13" fill="#e74c3c" font-weight="bold">Broca区</text>
+      <text x="120" y="93" font-size="10" fill="#e74c3c">(语言表达)</text>
+
+      <!-- Wernicke区标注 -->
+      <circle cx="290" cy="195" r="22" fill="none" stroke="#6c5ce7" stroke-width="2" stroke-dasharray="4,2"/>
+      <line x1="290" y1="217" x2="290" y2="240" stroke="#6c5ce7" stroke-width="1.5" marker-end="url(#arrow)"/>
+      <text x="300" y="248" font-size="13" fill="#6c5ce7" font-weight="bold">Wernicke区</text>
+      <text x="303" y="263" font-size="10" fill="#6c5ce7">(语言理解)</text>
+
+      <!-- 图例 -->
+      <g transform="translate(15, 310)">
+        <rect x="0" y="0" width="14" height="14" fill="#FF6B6B" fill-opacity="0.6" rx="2"/>
+        <text x="20" y="12" font-size="12" fill="#2d3436">额叶 (Frontal)</text>
+        <rect x="110" y="0" width="14" height="14" fill="#74B9FF" fill-opacity="0.55" rx="2"/>
+        <text x="130" y="12" font-size="12" fill="#2d3436">顶叶 (Parietal)</text>
+        <rect x="230" y="0" width="14" height="14" fill="#A29BFE" fill-opacity="0.55" rx="2"/>
+        <text x="250" y="12" font-size="12" fill="#2d3436">颞叶 (Temporal)</text>
+        <rect x="0" y="20" width="14" height="14" fill="#55EFC4" fill-opacity="0.55" rx="2"/>
+        <text x="20" y="32" font-size="12" fill="#2d3436">枕叶 (Occipital)</text>
+        <rect x="110" y="20" width="14" height="14" fill="#FDCB6E" fill-opacity="0.7" rx="2"/>
+        <text x="130" y="32" font-size="12" fill="#2d3436">小脑 (Cerebellum)</text>
+        <rect x="240" y="20" width="14" height="14" fill="#FAB1A0" fill-opacity="0.7" rx="2"/>
+        <text x="260" y="32" font-size="12" fill="#2d3436">脑干 (Brainstem)</text>
+      </g>
+    </svg>
+  </div>
+
+  <!-- 图2：内侧面观 -->
+  <div class="card">
+    <h2>内侧面观（矢状面）</h2>
+    <svg width="480" height="360" viewBox="0 0 480 360" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="shadow2" x="-2%" y="-2%" width="104%" height="104%">
+          <feDropShadow dx="0" dy="1" stdDeviation="2" flood-opacity="0.15"/>
+        </filter>
+        <marker id="arrow2" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+          <path d="M0,0 L8,3 L0,6 Z" fill="#636e72"/>
+        </marker>
+      </defs>
+
+      <!-- 大脑内侧面轮廓 -->
+      <path d="M60,90 Q100,35 190,25 Q280,18 360,40 Q420,60 450,100
+               Q470,140 470,180 Q470,220 450,255 Q430,280 390,290
+               Q350,300 310,295 Q280,290 255,280 Q235,270 220,255
+               Q200,240 185,220 Q165,195 140,170 Q110,145 80,125 Z"
+            fill="#dfe6e9" stroke="#636e72" stroke-width="1.5" filter="url(#shadow2)"/>
+
+      <!-- 胼胝体 (Corpus Callosum) -->
+      <path d="M100,155 Q140,115 200,105 Q260,95 320,110 Q360,120 380,140
+               Q390,155 385,170 Q380,185 365,190
+               Q340,200 290,195 Q240,190 190,180
+               Q140,170 115,165 Q100,162 95,160 Z"
+            fill="#dfe6e9" stroke="#636e72" stroke-width="1" fill-opacity="0.3"/>
+
+      <!-- 前额叶内侧 (medial PFC) - DMN的一部分 -->
+      <path d="M60,90 Q100,35 190,25 Q220,22 240,30 Q250,38 245,55
+               Q240,70 225,80 Q210,90 195,95 
+               Q175,100 155,108 Q135,115 115,125 Q95,135 80,145
+               Q65,155 60,165 Q55,145 56,120 Z"
+            fill="#FF6B6B" fill-opacity="0.4" stroke="#e74c3c" stroke-width="1"/>
+
+      <!-- 后扣带回 / 楔前叶 - DMN的一部分 -->
+      <path d="M320,110 Q360,120 380,140 Q390,155 385,170
+               Q380,185 365,190 Q380,175 388,155
+               Q392,135 388,115 Q380,95 365,80
+               Q345,65 325,60 Q310,58 300,62
+               Q290,70 290,80 Q295,95 305,105 Z"
+            fill="#55EFC4" fill-opacity="0.35" stroke="#00b894" stroke-width="1"/>
+
+      <!-- 丘脑 (Thalamus) -->
+      <ellipse cx="335" cy="175" rx="22" ry="18" fill="#81ecec" fill-opacity="0.7" stroke="#00cec9" stroke-width="1.5"/>
+
+      <!-- 下丘脑 (Hypothalamus) -->
+      <ellipse cx="325" cy="200" rx="16" ry="10" fill="#FAB1A0" fill-opacity="0.7" stroke="#d63031" stroke-width="1"/>
+
+      <!-- 海马 (Hippocampus) -->
+      <path d="M260,210 Q270,200 285,205 Q300,210 305,225
+               Q308,238 300,245 Q290,250 275,245
+               Q260,240 255,225 Q253,215 260,210 Z"
+            fill="#A29BFE" fill-opacity="0.6" stroke="#6c5ce7" stroke-width="1.5"/>
+
+      <!-- 杏仁核 (Amygdala) -->
+      <ellipse cx="310" cy="218" rx="10" ry="8" fill="#FF7675" fill-opacity="0.55" stroke="#d63031" stroke-width="1"/>
+
+      <!-- 前扣带回 (ACC) - 突显网络的一部分 -->
+      <path d="M190,95 Q210,82 240,75 Q270,70 295,78
+               Q310,85 315,100 Q318,110 310,118
+               Q295,115 275,110 Q250,105 225,105
+               Q205,105 190,100 Z"
+            fill="#fdcb6e" fill-opacity="0.45" stroke="#e17055" stroke-width="1"/>
+
+      <!-- 小脑 -->
+      <path d="M350,250 Q370,240 390,245 Q410,250 415,268
+               Q420,285 412,302 Q400,315 385,312
+               Q370,308 360,295 Q350,280 348,265 Z"
+            fill="#FDCB6E" fill-opacity="0.6" stroke="#e17055" stroke-width="1.5"/>
+
+      <!-- 脑干 -->
+      <path d="M380,300 Q388,310 392,330 Q394,348 390,355 Q385,358 378,353 Q374,342 372,330 Q370,315 375,305 Z"
+            fill="#FAB1A0" fill-opacity="0.6" stroke="#d63031" stroke-width="1.5"/>
+
+      <!-- 标注线 -->
+
+      <!-- 丘脑标注 -->
+      <line x1="357" y1="175" x2="430" y2="150" stroke="#00cec9" stroke-width="1.2" marker-end="url(#arrow2)"/>
+      <text x="432" y="148" font-size="12" fill="#00cec9" font-weight="bold">丘脑</text>
+      <text x="432" y="163" font-size="10" fill="#00cec9">(感觉中继站)</text>
+
+      <!-- 海马标注 -->
+      <line x1="305" y1="245" x2="430" y2="230" stroke="#6c5ce7" stroke-width="1.2" marker-end="url(#arrow2)"/>
+      <text x="432" y="228" font-size="12" fill="#6c5ce7" font-weight="bold">海马体</text>
+      <text x="432" y="243" font-size="10" fill="#6c5ce7">(记忆编码 / 空间导航)</text>
+
+      <!-- 杏仁核标注 -->
+      <line x1="320" y1="218" x2="430" y2="210" stroke="#d63031" stroke-width="1.2" marker-end="url(#arrow2)"/>
+      <text x="432" y="205" font-size="12" fill="#d63031" font-weight="bold">杏仁核</text>
+      <text x="432" y="220" font-size="10" fill="#d63031">(情绪处理)</text>
+
+      <!-- 胼胝体标注 -->
+      <line x1="240" y1="140" x2="150" y2="50" stroke="#636e72" stroke-width="1.2" marker-end="url(#arrow2)"/>
+      <text x="80" y="48" font-size="12" fill="#636e72" font-weight="bold">胼胝体</text>
+      <text x="72" y="63" font-size="10" fill="#636e72">(左右脑连接)</text>
+
+      <!-- 前扣带回标注 -->
+      <line x1="240" y1="95" x2="120" y2="70" stroke="#e17055" stroke-width="1.2" marker-end="url(#arrow2)"/>
+      <text x="30" y="68" font-size="12" fill="#e17055" font-weight="bold">前扣带回(ACC)</text>
+      <text x="28" y="83" font-size="10" fill="#e17055">(冲突检测 / 突显)</text>
+
+      <!-- mPFC 标注 -->
+      <line x1="140" y1="95" x2="50" y2="50" stroke="#e74c3c" stroke-width="1.2" marker-end="url(#arrow2)"/>
+      <text x="8" y="45" font-size="12" fill="#e74c3c" font-weight="bold">内侧前额叶(mPFC)</text>
+      <text x="8" y="60" font-size="10" fill="#e74c3c">(自我参照 / DMN)</text>
+
+      <!-- 图例 -->
+      <g transform="translate(15, 320)">
+        <rect x="0" y="0" width="12" height="12" fill="#FF6B6B" fill-opacity="0.4" rx="2"/><text x="16" y="10" font-size="11" fill="#2d3436">内侧前额叶 (DMN)</text>
+        <rect x="155" y="0" width="12" height="12" fill="#55EFC4" fill-opacity="0.35" rx="2"/><text x="171" y="10" font-size="11" fill="#2d3436">后扣带回 (DMN)</text>
+        <rect x="0" y="16" width="12" height="12" fill="#fdcb6e" fill-opacity="0.45" rx="2"/><text x="16" y="26" font-size="11" fill="#2d3436">前扣带回 (突显网络)</text>
+        <rect x="195" y="16" width="12" height="12" fill="#81ecec" fill-opacity="0.7" rx="2"/><text x="211" y="26" font-size="11" fill="#2d3436">丘脑</text>
+      </g>
+    </svg>
+  </div>
+
+  <!-- 图3：功能分区汇总表（横向对比） -->
+  <div class="card" style="max-width: 660px;">
+    <h2>脑区功能一览</h2>
+    <svg width="640" height="340" viewBox="0 0 640 340" xmlns="http://www.w3.org/2000/svg">
+      <style>
+        .title { font-size: 13px; font-weight: bold; fill: #2d3436; }
+        .head { font-size: 12px; font-weight: bold; fill: #fff; }
+        .cell { font-size: 11px; fill: #2d3436; }
+        .small { font-size: 10px; fill: #636e72; }
+      </style>
+      <rect x="0" y="0" width="640" height="40" rx="6" fill="#2d3436"/>
+      <text x="20" y="26" class="head">脑区</text>
+      <text x="120" y="26" class="head">亚区</text>
+      <text x="260" y="26" class="head">Brodmann</text>
+      <text x="370" y="26" class="head">核心功能</text>
+
+      <!-- 行1：额叶 -->
+      <rect x="0" y="42" width="640" height="42" fill="#FF6B6B" fill-opacity="0.08" rx="4"/>
+      <rect x="10" y="50" width="4" height="26" fill="#e74c3c" rx="2"/>
+      <text x="22" y="68" class="title">额叶</text>
+      <text x="120" y="62" class="cell">前额叶皮层 (PFC)</text>
+      <text x="120" y="78" class="cell">Broca区</text>
+      <text x="260" y="62" class="cell">BA 9/10/46</text>
+      <text x="260" y="78" class="cell">BA 44/45</text>
+      <text x="370" y="62" class="cell">执行功能、工作记忆、决策、社会认知</text>
+      <text x="370" y="78" class="cell">语言表达（运动性语言）</text>
+
+      <!-- 行2：顶叶 -->
+      <rect x="0" y="86" width="640" height="42" fill="#74B9FF" fill-opacity="0.08" rx="4"/>
+      <rect x="10" y="94" width="4" height="26" fill="#2980b9" rx="2"/>
+      <text x="22" y="112" class="title">顶叶</text>
+      <text x="120" y="106" class="cell">初级体感皮层 (S1)</text>
+      <text x="120" y="122" class="cell">顶上/顶下小叶</text>
+      <text x="260" y="106" class="cell">BA 1/2/3</text>
+      <text x="260" y="122" class="cell">BA 5/7/40</text>
+      <text x="370" y="106" class="cell">触觉、痛觉、温度觉</text>
+      <text x="370" y="122" class="cell">空间感知、注意力定向</text>
+
+      <!-- 行3：颞叶 -->
+      <rect x="0" y="130" width="640" height="42" fill="#A29BFE" fill-opacity="0.08" rx="4"/>
+      <rect x="10" y="138" width="4" height="26" fill="#6c5ce7" rx="2"/>
+      <text x="22" y="156" class="title">颞叶</text>
+      <text x="120" y="150" class="cell">听觉皮层</text>
+      <text x="120" y="166" class="cell">海马体 / 杏仁核</text>
+      <text x="260" y="150" class="cell">BA 41/42</text>
+      <text x="260" y="166" class="cell">—</text>
+      <text x="370" y="150" class="cell">听觉处理、Wernicke区（语言理解）</text>
+      <text x="370" y="166" class="cell">记忆编码（海马）、情绪（杏仁核）</text>
+
+      <!-- 行4：枕叶 -->
+      <rect x="0" y="174" width="640" height="42" fill="#55EFC4" fill-opacity="0.08" rx="4"/>
+      <rect x="10" y="182" width="4" height="26" fill="#00b894" rx="2"/>
+      <text x="22" y="200" class="title">枕叶</text>
+      <text x="120" y="194" class="cell">初级视觉皮层 (V1)</text>
+      <text x="120" y="210" class="cell">V2 ~ V5 (MT)</text>
+      <text x="260" y="194" class="cell">BA 17</text>
+      <text x="260" y="210" class="cell">BA 18/19</text>
+      <text x="370" y="194" class="cell">视觉信号入口</text>
+      <text x="370" y="210" class="cell">形状、颜色、运动感知</text>
+
+      <!-- 行5：皮层下 -->
+      <rect x="0" y="218" width="640" height="42" fill="#81ecec" fill-opacity="0.12" rx="4"/>
+      <rect x="10" y="226" width="4" height="26" fill="#00cec9" rx="2"/>
+      <text x="22" y="244" class="title">皮层下</text>
+      <text x="120" y="238" class="cell">丘脑 / 基底节</text>
+      <text x="120" y="254" class="cell">下丘脑</text>
+      <text x="260" y="238" class="cell">—</text>
+      <text x="260" y="254" class="cell">—</text>
+      <text x="370" y="238" class="cell">感觉中继（丘脑）、运动选择（基底节）</text>
+      <text x="370" y="254" class="cell">自主神经、内分泌、摄食、体温</text>
+
+      <!-- 行6：小脑 + 脑干 -->
+      <rect x="0" y="262" width="640" height="42" fill="#FDCB6E" fill-opacity="0.12" rx="4"/>
+      <rect x="10" y="270" width="4" height="26" fill="#e17055" rx="2"/>
+      <text x="22" y="288" class="title">小脑 / 脑干</text>
+      <text x="120" y="282" class="cell">小脑</text>
+      <text x="120" y="298" class="cell">脑干</text>
+      <text x="260" y="282" class="cell">—</text>
+      <text x="260" y="298" class="cell">—</text>
+      <text x="370" y="282" class="cell">运动协调、精细控制、运动学习</text>
+      <text x="370" y="298" class="cell">呼吸、心跳、血压、睡眠-觉醒</text>
+    </svg>
+  </div>
+
+</div>
+
+<div class="legend">
+  <div class="legend-item"><span class="legend-dot" style="background:#e74c3c;"></span> <b>额叶</b> — 执行功能、语言表达、运动控制</div>
+  <div class="legend-item"><span class="legend-dot" style="background:#2980b9;"></span> <b>顶叶</b> — 体感、空间定向</div>
+  <div class="legend-item"><span class="legend-dot" style="background:#6c5ce7;"></span> <b>颞叶</b> — 听觉、记忆、情绪、语言理解</div>
+  <div class="legend-item"><span class="legend-dot" style="background:#00b894;"></span> <b>枕叶</b> — 视觉</div>
+  <div class="legend-item"><span class="legend-dot" style="background:#e17055;"></span> <b>小脑 / 脑干</b> — 运动协调 + 生命维持</div>
+</div>
+
+<div class="footer">© Anatomical reference: Brodmann (1909) · 现代功能网络: Raichle (DMN), Seeley et al. (SN/CEN)</div>
+
+</body>
+</html>

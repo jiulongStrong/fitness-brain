@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>激素四巨头 — 减脂增肌的博弈</title>
+<style>
+  /* ===== 全局 ===== */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: #0b0e14;
+    color: #e8edf5;
+    overflow-x: hidden;
+    line-height: 1.7;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  /* ===== 粒子背景 ===== */
+  #particles-canvas {
+    position: fixed; inset: 0; z-index: 0;
+    pointer-events: none;
+  }
+
+  /* ===== 滚动容器 ===== */
+  .container {
+    position: relative; z-index: 1;
+    max-width: 960px; margin: 0 auto; padding: 40px 24px 80px;
+  }
+
+  /* ===== 头部 ===== */
+  .hero {
+    text-align: center; padding: 60px 0 40px;
+    position: relative;
+  }
+  .hero h1 {
+    font-size: 2.8rem; font-weight: 800;
+    background: linear-gradient(135deg, #f093fb, #f5576c, #4facfe, #43e97b);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradShift 6s ease infinite;
+  }
+  @keyframes gradShift {
+    0%,100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+  .hero .sub {
+    margin-top: 12px;
+    font-size: 1.1rem; color: #8892b0;
+    opacity: 0; animation: fadeUp 1s 0.3s forwards;
+  }
+
+  /* ===== 标题通用 ===== */
+  .section-title {
+    font-size: 1.6rem; font-weight: 700; margin: 60px 0 24px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .section-title .badge {
+    display: inline-block; font-size: 0.75rem; padding: 2px 12px;
+    border-radius: 20px; background: rgba(255,255,255,0.08);
+    color: #8892b0; font-weight: 400;
+  }
+
+  /* ===== 四巨头卡片 ===== */
+  .hormone-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  @media (max-width: 640px) { .hormone-grid { grid-template-columns: 1fr; } }
+
+  .hormone-card {
+    background: linear-gradient(145deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 20px; padding: 28px 24px;
+    backdrop-filter: blur(8px);
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: default;
+    position: relative; overflow: hidden;
+  }
+  .hormone-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px -12px rgba(0,0,0,0.6);
+  }
+
+  /* 卡片图标动画 */
+  .hormone-icon {
+    width: 56px; height: 56px; border-radius: 16px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.8rem; margin-bottom: 16px;
+    animation: float 3s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+  .hormone-card:nth-child(1) .hormone-icon { background: #f5576c22; color: #f5576c; animation-delay: 0s; }
+  .hormone-card:nth-child(2) .hormone-icon { background: #f093fb22; color: #f093fb; animation-delay: 0.5s; }
+  .hormone-card:nth-child(3) .hormone-icon { background: #4facfe22; color: #4facfe; animation-delay: 1s; }
+  .hormone-card:nth-child(4) .hormone-icon { background: #43e97b22; color: #43e97b; animation-delay: 1.5s; }
+
+  .hormone-name {
+    font-size: 1.3rem; font-weight: 700; margin-bottom: 4px;
+  }
+  .hormone-alias {
+    font-size: 0.8rem; color: #8892b0; margin-bottom: 12px;
+  }
+  .hormone-desc { font-size: 0.92rem; color: #a8b2d1; line-height: 1.7; }
+  .hormone-want {
+    display: inline-block; margin-top: 12px;
+    padding: 4px 14px; border-radius: 20px;
+    font-size: 0.82rem; font-weight: 600;
+  }
+  .want-up { background: #43e97b33; color: #43e97b; }
+  .want-down { background: #f5576c33; color: #f5576c; }
+  .want-control { background: #f5a62333; color: #f5a623; }
+
+  /* 卡片浮动光效 */
+  .hormone-card::before {
+    content: ''; position: absolute; top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.03) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  /* ===== 天平（博弈） ===== */
+  .scale-section {
+    margin: 40px 0; padding: 32px 24px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 20px;
+  }
+  .scale-section h3 {
+    text-align: center; font-size: 1.1rem; margin-bottom: 24px;
+    color: #a8b2d1;
+  }
+  .scale {
+    position: relative; height: 200px;
+    display: flex; flex-direction: column; align-items: center;
+  }
+  .scale-pivot {
+    width: 12px; height: 12px; background: #8892b0;
+    border-radius: 50%; position: absolute; top: 30px;
+    animation: pivotGlow 2s ease-in-out infinite;
+  }
+  @keyframes pivotGlow {
+    0%,100% { box-shadow: 0 0 6px #8892b0; }
+    50% { box-shadow: 0 0 20px #8892b0aa; }
+  }
+  .scale-beam {
+    position: absolute; top: 30px; left: 50%;
+    width: 300px; height: 4px;
+    background: #2d334a; border-radius: 2px;
+    transform-origin: center;
+    transition: transform 1s ease;
+  }
+  .scale-beam.tilt-left { transform: translateX(-50%) rotate(-8deg); }
+  .scale-beam.tilt-right { transform: translateX(-50%) rotate(8deg); }
+  .scale-beam.balanced { transform: translateX(-50%) rotate(0deg); }
+
+  .scale-tray {
+    position: absolute; top: 50px; display: flex;
+    flex-direction: column; align-items: center;
+    width: 120px; transition: transform 1s ease;
+  }
+  .scale-tray.left {
+    left: calc(50% - 150px);
+    transform: translateY(0);
+  }
+  .scale-tray.right {
+    left: calc(50% + 30px);
+    transform: translateY(0);
+  }
+  .scale-tray .tray-label {
+    font-size: 0.85rem; font-weight: 700; margin-top: 8px;
+  }
+  .scale-tray .tray-label.green { color: #43e97b; }
+  .scale-tray .tray-label.red { color: #f5576c; }
+  .scale-tray .tray-icon { font-size: 2rem; }
+  .scale-tray .tray-desc {
+    font-size: 0.7rem; color: #8892b0; text-align: center;
+    margin-top: 4px;
+  }
+
+  /* 天平底部动画装饰 */
+  .scale-base {
+    position: absolute; bottom: 10px;
+    width: 60px; height: 4px; background: #2d334a;
+    border-radius: 2px;
+  }
+
+  /* ===== 24h 时间轴 ===== */
+  .timeline-wrap {
+    position: relative; padding: 24px 0 0; margin: 32px 0;
+  }
+  .timeline-track {
+    position: relative; height: 120px; margin: 0 20px;
+    background: linear-gradient(to right, #1a1f2e, #2d334a, #1a1f2e);
+    border-radius: 60px;
+    overflow: hidden;
+  }
+  .timeline-hours {
+    display: flex; justify-content: space-between;
+    padding: 0 20px; margin-top: 6px;
+    font-size: 0.7rem; color: #4a5268;
+  }
+  .timeline-band {
+    position: absolute; top: 0; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.6rem; color: rgba(255,255,255,0.5);
+    border-radius: 6px; font-weight: 600;
+  }
+  .band-cortisol { background: #f5576c33; left: 0; width: 25%; }
+  .band-testo { background: #4facfe33; left: 25%; width: 25%; }
+  .band-insulin { background: #f5a62333; left: 50%; width: 25%; }
+  .band-gh { background: #43e97b33; left: 75%; width: 25%; }
+
+  /* 游动曲线 */
+  .timeline-curve {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  }
+  .timeline-curve svg { width: 100%; height: 100%; overflow: visible; }
+
+  /* ===== 翻车场景 ===== */
+  .crash-list {
+    display: flex; flex-direction: column; gap: 16px;
+    margin: 20px 0;
+  }
+  .crash-item {
+    display: flex; align-items: flex-start; gap: 16px;
+    padding: 18px 20px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 14px;
+    transition: background 0.3s;
+  }
+  .crash-item:hover { background: rgba(255,255,255,0.04); }
+  .crash-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 2px; }
+  .crash-content { flex: 1; }
+  .crash-label { font-size: 0.85rem; font-weight: 600; margin-bottom: 4px; }
+  .crash-desc { font-size: 0.85rem; color: #8892b0; }
+  .crash-result {
+    margin-top: 6px; padding: 4px 12px;
+    border-radius: 8px; font-size: 0.8rem; display: inline-block;
+  }
+  .result-bad { background: #f5576c22; color: #f5576c; }
+  .result-good { background: #43e97b22; color: #43e97b; }
+
+  /* ===== 总结框 ===== */
+  .summary-box {
+    margin-top: 40px; padding: 28px 24px;
+    background: linear-gradient(135deg, rgba(79,172,254,0.06), rgba(67,233,123,0.06));
+    border: 1px solid rgba(79,172,254,0.15);
+    border-radius: 20px;
+    font-size: 1rem; line-height: 1.8;
+    text-align: center;
+  }
+  .summary-box strong { color: #4facfe; }
+  .summary-box em { color: #43e97b; font-style: normal; }
+  .summary-box .highlight-red { color: #f5576c; }
+
+  /* ===== 动画辅助 ===== */
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; transform: translateY(12px); }
+  }
+  .fade-up {
+    opacity: 0; transform: translateY(12px);
+    animation: fadeUp 0.6s forwards;
+  }
+  .fade-up:nth-child(1) { animation-delay: 0.1s; }
+  .fade-up:nth-child(2) { animation-delay: 0.2s; }
+  .fade-up:nth-child(3) { animation-delay: 0.3s; }
+  .fade-up:nth-child(4) { animation-delay: 0.4s; }
+
+  /* ===== 总结语 ===== */
+  .footer-note {
+    text-align: center; margin-top: 60px;
+    font-size: 0.82rem; color: #4a5268;
+  }
+
+  /* ===== 动态标语 Banner ===== */
+  .mantra-bar {
+    margin: 40px 0; padding: 20px;
+    background: rgba(255,255,255,0.02);
+    border-radius: 16px;
+    border-left: 3px solid #f093fb;
+    font-size: 1.05rem; font-weight: 500;
+    text-align: center;
+    opacity: 0; animation: fadeUp 0.8s 0.8s forwards;
+  }
+  .mantra-bar .highlight { color: #f093fb; }
+</style>
+</head>
+<body>
+
+<!-- ===== 粒子背景 ===== -->
+<canvas id="particles-canvas"></canvas>
+
+<div class="container">
+
+  <!-- ===== 头部 ===== -->
+  <div class="hero">
+    <h1>🧬 激素四巨头</h1>
+    <p class="sub">胰岛素 · 皮质醇 · 睾丸酮 · 生长激素 — 减脂增肌幕后的真正操盘手</p>
+  </div>
+
+  <!-- ===== 引言 ===== -->
+  <div class="mantra-bar">
+    🧠 你减的是脂肪还是肌肉，不是由意志力决定的<br>
+    —— 而是由这四种激素说了算。<span class="highlight">指令对了，事半功倍。</span>
+  </div>
+
+  <!-- ===== 四巨头卡片 ===== -->
+  <div class="section-title">
+    🃏 四巨头档案 <span class="badge">hover 看细节</span>
+  </div>
+  <div class="hormone-grid">
+
+    <div class="hormone-card">
+      <div class="hormone-icon">💉</div>
+      <div class="hormone-name" style="color:#f5576c;">胰岛素</div>
+      <div class="hormone-alias">储存激素 · 胰岛素</div>
+      <div class="hormone-desc">
+        把血糖送进细胞——肌细胞（好）or 脂肪细胞（坏）。<br>
+        <strong style="color:#e8edf5;">训练后是盟友</strong>：把碳水和蛋白送进肌肉修复。<br>
+        <strong style="color:#8892b0;">其他时间是敌人</strong>：持续偏高 → 囤脂。
+      </div>
+      <span class="hormone-want want-control">🔀 训练后要高，平时要稳</span>
+    </div>
+
+    <div class="hormone-card">
+      <div class="hormone-icon">😰</div>
+      <div class="hormone-name" style="color:#f093fb;">皮质醇</div>
+      <div class="hormone-alias">压力激素 · Cortisol</div>
+      <div class="hormone-desc">
+        分解肌肉 → 升糖 → 囤内脏脂肪。<br>
+        运动时短暂升高是<strong style="color:#e8edf5;">正常的</strong>（帮你动员能量）。<br>
+        问题是<strong style="color:#f5576c;">长期偏高</strong>：肌肉流失 + 腹部脂肪 + 睡眠差。
+      </div>
+      <span class="hormone-want want-down">⬇ 越低越好（尤其晚上）</span>
+    </div>
+
+    <div class="hormone-card">
+      <div class="hormone-icon">⚡</div>
+      <div class="hormone-name" style="color:#4facfe;">睾丸酮</div>
+      <div class="hormone-alias">合成激素 · Testosterone</div>
+      <div class="hormone-desc">
+        促进肌肉合成 → 提高基础代谢。<br>
+        力量训练后短暂升高，是<strong style="color:#e8edf5;">最好的增肌信号</strong>。<br>
+        长期低热量 + 低脂肪 → 睾丸酮↓ → 没劲、掉肌肉。
+      </div>
+      <span class="hormone-want want-up">⬆ 越高越好</span>
+    </div>
+
+    <div class="hormone-card">
+      <div class="hormone-icon">🌙</div>
+      <div class="hormone-name" style="color:#43e97b;">生长激素</div>
+      <div class="hormone-alias">燃脂激素 · GH</div>
+      <div class="hormone-desc">
+        促进脂肪分解 → 保护肌肉。<br>
+        高强度训练后 + 深度睡眠时<strong style="color:#e8edf5;">自然分泌最旺盛</strong>。<br>
+        熬夜 = GH 分泌被砍掉大半。
+      </div>
+      <span class="hormone-want want-up">⬆ 越高越好</span>
+    </div>
+
+  </div>
+
+  <!-- ===== 天平博弈 ===== -->
+  <div class="scale-section">
+    <h3>⚖️ 核心博弈：皮质醇 vs 睾丸酮</h3>
+    <div class="scale" id="hormoneScale">
+      <div class="scale-pivot" id="scalePivot"></div>
+      <div class="scale-beam balanced" id="scaleBeam"></div>
+      <div class="scale-tray left" id="trayLeft">
+        <div class="tray-icon" style="filter:drop-shadow(0 0 12px #f5576c66);">😰</div>
+        <div class="tray-label red">皮质醇 ↑</div>
+        <div class="tray-desc">压力 · 缺觉 · 过度有氧</div>
+      </div>
+      <div class="scale-tray right" id="trayRight">
+        <div class="tray-icon" style="filter:drop-shadow(0 0 12px #4facfe66);">⚡</div>
+        <div class="tray-label green">睾丸酮 ↑</div>
+        <div class="tray-desc">力量训练 · 睡够 · 吃够脂肪</div>
+      </div>
+      <div class="scale-base"></div>
+    </div>
+    <p style="text-align:center; font-size:0.85rem; color:#8892b0; margin-top:16px;">
+      🔄 天平自动倾斜演示 —— 皮质醇一高，睾丸酮就低
+    </p>
+  </div>
+
+  <!-- ===== 24h 激素节奏 ===== -->
+  <div class="section-title">
+    🕐 24h 激素节律 <span class="badge">颜色越亮 = 浓度越高</span>
+  </div>
+  <div class="timeline-wrap">
+    <div class="timeline-track" id="timelineTrack">
+      <div class="timeline-curve" id="timelineCurve">
+        <svg viewBox="0 0 800 120" preserveAspectRatio="none">
+          <!-- 皮质醇（红）：早高晚低 -->
+          <path id="curveCortisol" d="M0,30 C100,10 200,15 300,40 C400,70 500,80 600,90 C700,100 800,110 800,110"
+                stroke="#f5576c" stroke-width="3" fill="none" stroke-linecap="round"
+                stroke-dasharray="4 4" opacity="0.4"/>
+          <!-- 睾丸酮（蓝）：早高，训练后小峰 -->
+          <path id="curveTesto" d="M0,50 C100,35 200,40 300,55 C400,65 500,60 600,70 C700,75 800,80 800,80"
+                stroke="#4facfe" stroke-width="3" fill="none" stroke-linecap="round"
+                stroke-dasharray="4 4" opacity="0.4"/>
+          <!-- 生长激素（绿）：睡眠时飙升 -->
+          <path id="curveGH" d="M0,100 C100,100 200,100 300,100 C400,100 500,95 600,60 C650,40 700,10 750,10 C780,10 800,15 800,15"
+                stroke="#43e97b" stroke-width="3" fill="none" stroke-linecap="round"
+                stroke-dasharray="4 4" opacity="0.4"/>
+          <!-- 动画光标 -->
+          <circle r="6" fill="none" stroke="#fff" stroke-width="2" opacity="0.6">
+            <animateMotion dur="8s" repeatCount="indefinite">
+              <mpath href="#curveCortisol"/>
+            </animateMotion>
+          </circle>
+        </svg>
+      </div>
+      <!-- 阶段色条 -->
+      <div class="timeline-band band-cortisol" style="left:0%;width:20%;">🌅 皮质醇晨峰</div>
+      <div class="timeline-band band-testo" style="left:20%;width:25%;">☀️ 睾丸酮活跃</div>
+      <div class="timeline-band band-insulin" style="left:45%;width:20%;">🍚 胰岛素餐后峰</div>
+      <div class="timeline-band band-gh" style="left:65%;width:25%;">🌙 GH 睡眠分泌</div>
+      <div class="timeline-band" style="left:90%;width:10%;background:#2d334a;color:#4a5268;">😴 深睡</div>
+    </div>
+    <div class="timeline-hours">
+      <span>6:00</span><span>9:00</span><span>12:00</span><span>15:00</span><span>18:00</span><span>21:00</span><span>0:00</span><span>3:00</span><span>6:00</span>
+    </div>
+
+    <!-- 时间轴注记 -->
+    <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:18px;font-size:0.78rem;color:#8892b0;justify-content:center;">
+      <span><span style="color:#f5576c;">●</span> 皮质醇 — 早高晚低，23:00 前睡觉降下来</span>
+      <span><span style="color:#4facfe;">●</span> 睾丸酮 — 早晨峰值，力量训练后小高峰</span>
+      <span><span style="color:#43e97b;">●</span> 生长激素 — 深度睡眠时大量分泌</span>
+    </div>
+  </div>
+
+  <!-- ===== 翻车场景 ===== -->
+  <div class="section-title">
+    🚫 减脂期常见翻车 <span class="badge">激素视角</span>
+  </div>
+  <div class="crash-list">
+    <div class="crash-item">
+      <div class="crash-icon">🍽️</div>
+      <div class="crash-content">
+        <div class="crash-label">🚫 每天饿着 + 大量有氧（跑 1h）</div>
+        <div class="crash-desc">皮质醇 ↑↑↑ 睾丸酮 ↓↓，身体进入"饥荒模式"</div>
+        <span class="crash-result result-bad">⬇ 肌肉流失 · 代谢下降 · 反弹</span>
+      </div>
+    </div>
+    <div class="crash-item">
+      <div class="crash-icon">🏋️</div>
+      <div class="crash-content">
+        <div class="crash-label">✅ 力量训练 + 吃够蛋白 + 睡好</div>
+        <div class="crash-desc">睾丸酮 ↑ 皮质醇可控，身体选择烧脂肪</div>
+        <span class="crash-result result-good">⬆ 脂肪掉 · 肌肉涨 · 代谢上升</span>
+      </div>
+    </div>
+    <div class="crash-item">
+      <div class="crash-icon">🥑</div>
+      <div class="crash-content">
+        <div class="crash-label">🚫 长期低脂饮食（脂肪 < 0.6g/kg）</div>
+        <div class="crash-desc">脂肪是睾丸酮的合成原料，缺了 → 睾丸酮↓</div>
+        <span class="crash-result result-bad">⬇ 没劲 · 掉肌肉 · 性欲下降</span>
+      </div>
+    </div>
+    <div class="crash-item">
+      <div class="crash-icon">😴</div>
+      <div class="crash-content">
+        <div class="crash-label">🚫 长期睡不够 6h</div>
+        <div class="crash-desc">皮质醇 ↑20-30% + 生长激素分泌减半</div>
+        <span class="crash-result result-bad">⬇ 更难减脂 · 更想吃甜的</span>
+      </div>
+    </div>
+    <div class="crash-item">
+      <div class="crash-icon">🏊</div>
+      <div class="crash-content">
+        <div class="crash-label">✅ 游泳从 60min → 45min</div>
+        <div class="crash-desc">减了 15min → 皮质醇不高了 + 肌肉保住了</div>
+        <span class="crash-result result-good">⬆ 脂肪继续烧，身体不抗议</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 总结 ===== -->
+  <div class="summary-box">
+    <div style="font-size:2rem;margin-bottom:8px;">🎯</div>
+    决定你体成分的，不是意志力，是 <strong>激素环境</strong>。<br>
+    你要做的不是"扛饿"，而是 <em>通过训练和饮食操控激素</em><br>
+    <span style="display:inline-block;margin-top:12px;padding:8px 20px;background:rgba(255,255,255,0.04);border-radius:12px;">
+      🔴 力量训练 ↕ 睡够 ↕ 练后补碳水 = 睾丸酮↑ 皮质醇↓ → <span class="highlight-red">脂肪走</span> · <span style="color:#43e97b;">肌肉留</span>
+    </span>
+  </div>
+
+  <div class="footer-note">
+    🧬 激素四巨头 · 减脂增肌底层逻辑 · Strong &amp; Joanna
+  </div>
+
+</div>
+
+<script>
+// ===== 粒子系统 =====
+(function() {
+  const canvas = document.getElementById('particles-canvas');
+  const ctx = canvas.getContext('2d');
+  let w, h, particles = [];
+
+  function resize() {
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = document.body.scrollHeight;
+  }
+  resize(); window.addEventListener('resize', resize);
+
+  for (let i = 0; i < 80; i++) {
+    particles.push({
+      x: Math.random() * w, y: Math.random() * h,
+      vx: (Math.random() - 0.5) * 0.3,
+      vy: (Math.random() - 0.5) * 0.3,
+      r: Math.random() * 2 + 0.5,
+      a: Math.random() * 0.3 + 0.1
+    });
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, w, h);
+    for (let p of particles) {
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0) p.x = w; if (p.x > w) p.x = 0;
+      if (p.y < 0) p.y = h; if (p.y > h) p.y = 0;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255,255,255,${p.a})`;
+      ctx.fill();
+    }
+    // 连线
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 120) {
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.strokeStyle = `rgba(255,255,255,${0.08 * (1 - dist / 120)})`;
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+
+  // 页面滚动时重新调整画布高度
+  window.addEventListener('scroll', resize);
+})();
+
+// ===== 天平倾斜动画 =====
+(function() {
+  const beam = document.getElementById('scaleBeam');
+  const trayL = document.getElementById('trayLeft');
+  const trayR = document.getElementById('trayRight');
+  let tilt = 0; // 0=平衡, -1=左倾(皮质醇高), 1=右倾(睾丸酮高)
+  let dir = 1;
+
+  setInterval(() => {
+    // 循环：平衡→左倾(皮质醇高)→平衡→右倾(睾丸酮高)→平衡…
+    const phase = Date.now() % 16000;
+    if (phase < 4000) {
+      // 平衡→左倾
+      const p = phase / 4000;
+      tilt = p * (-1);
+    } else if (phase < 8000) {
+      // 左倾保持
+      tilt = -1;
+    } else if (phase < 10000) {
+      // 左倾→平衡
+      const p = (phase - 8000) / 2000;
+      tilt = -1 + p;
+    } else if (phase < 12000) {
+      // 平衡→右倾
+      const p = (phase - 10000) / 2000;
+      tilt = p;
+    } else if (phase < 14000) {
+      // 右倾保持
+      tilt = 1;
+    } else {
+      // 右倾→平衡
+      const p = (phase - 14000) / 2000;
+      tilt = 1 - p;
+    }
+
+    const deg = tilt * 8;
+    beam.style.transform = `translateX(-50%) rotate(${deg}deg)`;
+    trayL.style.transform = `translateY(${-tilt * 18}px)`;
+    trayR.style.transform = `translateY(${tilt * 18}px)`;
+  }, 50);
+})();
+
+// ===== 卡片鼠标光效 =====
+document.querySelectorAll('.hormone-card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const rect = card.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    card.style.setProperty('--mouse-x', x + '%');
+    card.style.setProperty('--mouse-y', y + '%');
+  });
+});
+
+// ===== 时间轴 SVG 波浪动画 =====
+(function() {
+  const paths = document.querySelectorAll('.timeline-curve path');
+  let offset = 0;
+  setInterval(() => {
+    offset = (offset + 1) % 100;
+    paths.forEach(p => {
+      p.style.transition = 'none';
+      // 用 stroke-dashoffset 制造流动感
+      p.style.strokeDashoffset = offset;
+    });
+  }, 100);
+})();
+</script>
+
+</body>
+</html>
