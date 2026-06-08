@@ -9,9 +9,10 @@
   h1 { color: #2d3436; font-size: 24px; margin-bottom: 6px; }
   .subtitle { color: #636e72; font-size: 14px; margin-bottom: 20px; }
   .container { display: flex; flex-wrap: wrap; justify-content: center; gap: 24px; max-width: 1100px; }
-  .card { background: #fff; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); padding: 16px; }
+  .card { background: #fff; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); padding: 16px; max-width: 100%; overflow-x: auto; }
   .card h2 { text-align: center; color: #2d3436; font-size: 16px; margin: 0 0 8px 0; }
-  svg { display: block; }
+  svg { display: block; max-width: 100%; height: auto; }
+  @media (max-width: 600px) { h1 { font-size: 18px; } .subtitle { font-size: 12px; } .container { gap: 16px; } body { padding: 10px; } }
   .legend { max-width: 320px; line-height: 1.7; font-size: 13px; color: #2d3436; margin-top: 20px; }
   .legend-item { display: flex; align-items: center; gap: 8px; margin: 4px 0; }
   .legend-dot { width: 16px; height: 16px; border-radius: 4px; flex-shrink: 0; }
