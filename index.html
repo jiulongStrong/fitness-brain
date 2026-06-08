@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>健身 · 脑科学 · 知识库</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #1a1a2e; color: #e0e0e0; font-family: "PingFang SC","Microsoft YaHei",sans-serif; padding: 20px; min-height: 100vh; display: flex; justify-content: center; align-items: center; }
+  .container { max-width: 860px; width: 100%; background: #16213e; border-radius: 20px; padding: 40px; box-shadow: 0 8px 40px rgba(0,0,0,0.4); }
+  .header { text-align: center; margin-bottom: 36px; }
+  .header h1 { font-size: 28px; background: linear-gradient(135deg,#ff6b6b,#feca57,#55efc4,#a29bfe); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 6px; }
+  .header p { color: #8892b0; font-size: 14px; }
+  .section-title { font-size: 16px; color: #feca57; margin: 28px 0 14px; padding-bottom: 8px; border-bottom: 2px solid #2d3436; display: flex; align-items: center; gap: 8px; }
+  .section-title .tag { font-size: 11px; background: #2d3436; color: #8892b0; padding: 2px 8px; border-radius: 8px; -webkit-text-fill-color: #8892b0; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } .container { padding: 20px; } }
+  .card { display: flex; align-items: center; gap: 12px; background: #1a1a3e; border-radius: 12px; padding: 14px 16px; text-decoration: none; color: #e0e0e0; transition: all 0.2s; border: 1px solid transparent; }
+  .card:hover { background: #0f3460; border-color: #a29bfe44; transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.3); }
+  .card-icon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+  .card-info { flex: 1; min-width: 0; }
+  .card-title { font-size: 14px; font-weight: 600; }
+  .card-desc { font-size: 12px; color: #8892b0; margin-top: 2px; }
+  .card-arrow { color: #2d3436; font-size: 16px; transition: color 0.2s; }
+  .card:hover .card-arrow { color: #a29bfe; }
+  .icon-brain { background: #ff6b6b22; }
+  .icon-hormone { background: #f093fb22; }
+  .icon-test { background: #a29bfe22; }
+  .icon-knowledge { background: #48dbfb22; }
+  .icon-fire { background: #ff6b6b22; }
+  .icon-bolt { background: #feca5722; }
+  .icon-muscle { background: #fd79a822; }
+  .icon-guide { background: #55efc422; }
+  .icon-card-s { background: #0984e322; }
+  .icon-card-j { background: #fd79a822; }
+  .footer { text-align: center; margin-top: 32px; font-size: 12px; color: #2d3436; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+  <h1>🏋️ 健身 · 脑科学 · 知识库</h1>
+  <p>Strong &amp; Joanna 的训练方案 / 交互式科普页面</p>
+</div>
+
+<div class="section-title">
+  🧠 神经脑科学 <span class="tag">交互式</span>
+</div>
+<div class="grid">
+  <a class="card" href="brain-region-diagram.html">
+    <div class="card-icon icon-brain">🧠</div>
+    <div class="card-info">
+      <div class="card-title">大脑脑区示意图</div>
+      <div class="card-desc">侧面观 · 内侧面观 · 水平截面 · Brodmann 分区</div>
+    </div>
+    <span class="card-arrow">→</span>
+  </a>
+  <a class="card" href="hormone-four-giants.html">
+    <div class="card-icon icon-hormone">🧬</div>
+    <div class="card-info">
+      <div class="card-title">激素四巨头博弈</div>
+      <div class="card-desc">胰岛素 · 皮质醇 · 睾丸酮 · 生长激素</div>
+    </div>
+    <span class="card-arrow">→</span>
+  </a>
+  <a class="card" href="neural-type-assessment.html">
+    <div class="card-icon icon-test">📋</div>
+    <div class="card-info">
+      <div class="card-title">神经类型多维评估</div>
+      <div class="card-desc">HSP · BIS/BAS · 外向性 · 神经质 · 自主调节</div>
+    </div>
+    <span class="card-arrow">→</span>
+  </a>
+  <a class="card" href="knowledge-internalization-process.html">
+    <div class="card-icon icon-knowledge">🎓</div>
+    <div class="card-info">
+      <div class="card-title">知识内化脑区过程</div>
+      <div class="card-desc">6 阶段 · 从有意识到无意识内化的脑区动态</div>
+    </div>
+    <span class="card-arrow">→</span>
+  </a>
+</div>
+
+<div class="section-title">
+  🔥 Strong 减脂增肌 <span class="tag">方案 · 执行</span>
+</div>
+<div class="grid">
+  <a class="card" href="fitness-fat-loss-muscle-gain-plan-strong.html">
+    <div class="card-icon icon-fire">🔥</div>
+    <div class="card-info">
+      <div class="card-title">减脂增肌方案</div>
+      <div class="card-desc">90kg · 骑车通勤 · 游泳 + 力量 · 皮质醇管理</div>
+    </div>
+    <span class="card-arrow">→</span>
+  </a>
+  <a class="card" href="quick-fat-loss-plan-strong.html">
+    <div class="card-icon icon-bolt">⚡</div>
+    <div class="card-info">
+      <div class="card-title">快速减脂执行方案</div>
+      <div class="card-desc">第一周执行清单 · 每日执行卡 · 预期效果</div>
+    </div>
+    <span class="card-arrow">→</span>
+  </a>
+  <a class="card" href="daily-execution-card-strong.html">
+    <div class="card-icon icon-card-s">🏋️</div>
+    <div class="card-info">
+      <div class="card-title">每日执行卡 — Strong</div>
+      <div class="card-desc">每日必做 · 训练课表 · 每周检查</div>
+    </div>
+    <span class="card-arrow">→</span>
+  </a>
+</div>
+
+<div class="section-title">
+  💪 Joanna 增肌训练 <span class="tag">方案 · 动作 · 执行</span>
+</div>
+<div class="grid">
+  <a class="card" href="muscle-gain-plan-joanna.html">
+    <div class="card-icon icon-muscle">💪</div>
+    <div class="card-info">
+      <div class="card-title">增肌训练计划</div>
+      <div class="card-desc">33岁 · 47kg · 顺应生理周期 · 按月循环</div>
+    </div>
+    <span class="card-arrow">→</span>
+  </a>
+  <a class="card" href="exercise-guide-joanna.html">
+    <div class="card-icon icon-guide">🎬</div>
+    <div class="card-info">
+      <div class="card-title">动作指南（零基础版）</div>
+      <div class="card-desc">臀腿 · 上身 · 核心 · 常见问题排查</div>
+    </div>
+    <span class="card-arrow">→</span>
+  </a>
+  <a class="card" href="daily-execution-card-joanna.html">
+    <div class="card-icon icon-card-j">🏋️</div>
+    <div class="card-info">
+      <div class="card-title">每日执行卡 — Joanna</div>
+      <div class="card-desc">月经期 · 卵泡期 · 黄体期 · 每周检查</div>
+    </div>
+    <span class="card-arrow">→</span>
+  </a>
+</div>
+
+<div class="footer">
+  jiulongStrong/fitness-brain · GitHub Pages
+</div>
+
+</div>
+</body>
+</html>
